@@ -3,8 +3,11 @@ using UnityEditor;
 using System.Collections.Generic;
  
  
-public class NodeEditor : EditorWindow {
- 
+public class NodeEditor : EditorWindow
+{
+
+    public string stringToEdit;
+    
     List<Rect> windows = new List<Rect>();
     List<int> windowsToAttach = new List<int>();
     List<int> attachedWindows = new List<int>();
@@ -46,7 +49,7 @@ public class NodeEditor : EditorWindow {
         if (GUILayout.Button("Attach")) {
             windowsToAttach.Add(id);
         }
- 
+
         GUI.DragWindow();
     }
  
