@@ -7,5 +7,5 @@ public class DialogueNode : Node
 {
     public string GUID;
     public string dialogueText;
-    public bool entrypoint = false;
+    public bool Entrypoint = false;
 }
