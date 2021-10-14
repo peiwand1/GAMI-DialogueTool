@@ -128,8 +128,8 @@ public class GraphSaveUtility
         
         foreach (var perNode in Nodes)
         {
-            Debug.Log(perNode);
-            if (perNode.Entrypoint) return;
+            
+            if (perNode.Entrypoint) continue;
             Edges.Where(x => x.input.node == perNode).ToList().ForEach(edge => _targetGraphView.RemoveElement(edge));
             _targetGraphView.RemoveElement(perNode);
         }

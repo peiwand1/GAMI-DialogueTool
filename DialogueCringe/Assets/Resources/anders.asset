@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6727c9ba1c50774ab6f4ea163ef5eda, type: 3}
-  m_Name: New Narrative
+  m_Name: anders
   m_EditorClassIdentifier: 
   DialogueNodeData:
-  - NodeGUID: 596f06b7-5e93-4c8d-83e7-456136ddcc0c
-    DialogueText: Dialogue Node
-    Position: {x: 163, y: -2}
   - NodeGUID: 3df2817d-65e1-48bc-81a0-c5b7a5c01bfa
     DialogueText: Dialogue Node
     Position: {x: 160, y: 227}
   - NodeGUID: 98367b1b-742d-4aa3-8c73-a6a473ec2f01
     DialogueText: d
-    Position: {x: -215, y: 124}
+    Position: {x: -247, y: -9}
+  - NodeGUID: 596f06b7-5e93-4c8d-83e7-456136ddcc0c
+    DialogueText: Dialogue Node
+    Position: {x: 101, y: -150}
