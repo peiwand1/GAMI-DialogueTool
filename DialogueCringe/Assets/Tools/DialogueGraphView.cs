@@ -5,11 +5,15 @@ using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using System.Linq;
+using UnityEditor;
 
 public class DialogueGraphView : GraphView
 {
     public readonly Vector2 defaultNodeSize = new Vector2(150, 200);
-    public DialogueGraphView()
+
+    private NodeSearchWindow searchWindow;
+    
+    public DialogueGraphView(EditorWindow editorWindow)
     {
         styleSheets.Add(Resources.Load<StyleSheet>("DialogueGraph"));
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
@@ -23,6 +27,15 @@ public class DialogueGraphView : GraphView
         grid.StretchToParentSize();
 
         AddElement(GenerateEntryPointNode());
+        AddSearchWindow(editorWindow);
+    }
+
+    private void AddSearchWindow(EditorWindow editorWindow)
+    {
+        searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
+        searchWindow.Init(editorWindow, this);
+        nodeCreationRequest = context =>
+            SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
     }
 
     public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
@@ -66,12 +79,12 @@ public class DialogueGraphView : GraphView
         return node;
     }
 
-    public void CreateNode(string nodeName)
+    public void CreateNode(string nodeName, Vector2 mousePosition)
     {
-        AddElement(CreateDialogueNode(nodeName));
+        AddElement(CreateDialogueNode(nodeName, mousePosition));
     }
 
-    public DialogueNode CreateDialogueNode(string nodeName)
+    public DialogueNode CreateDialogueNode(string nodeName, Vector2 mousePosition)
     {
         var dialogueNode = new DialogueNode
         {
@@ -100,7 +113,7 @@ public class DialogueGraphView : GraphView
 
         dialogueNode.RefreshExpandedState();
         dialogueNode.RefreshPorts();
-        dialogueNode.SetPosition(new Rect(Vector2.zero, defaultNodeSize));
+        dialogueNode.SetPosition(new Rect(mousePosition, defaultNodeSize));
 
         return dialogueNode;
     }
