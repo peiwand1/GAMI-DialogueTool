@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
+using Tools.Runtime.Properties;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-using System;
 using UnityEditor.Experimental.GraphView;
 
 public class DialogueGraph : EditorWindow
@@ -23,12 +22,43 @@ public class DialogueGraph : EditorWindow
         ConstructGraphView();
         GenerateToolBar();
         GenerateMiniMap();
+        GenerateBlackboard();
+    }
+
+    private void GenerateBlackboard()
+    {
+        var blackboard = new Blackboard(_graphView);
+        blackboard.Add(new BlackboardSection { title = "Exposed Properties" });
+        blackboard.addItemRequested = _blackboard =>
+        {
+            _graphView.AddPropertyToBlackboard(new ExposedStringProperty());
+        };
+        blackboard.editTextRequested = (blackboard1, element, newValue) =>
+        {
+            var oldPropertyName = ((BlackboardField)element).text;
+            if (_graphView.ExposedProperties.Any(x => x.PropertyName.ToLower().Equals(newValue.ToLower())))
+            {
+                EditorUtility.DisplayDialog("Error", "This property name already exists, pleas choose another one!",
+                    "OK");
+                return;
+            }
+
+            var propertyIndex = _graphView.ExposedProperties.FindIndex(x => x.PropertyName.Equals(oldPropertyName));
+            _graphView.ExposedProperties[propertyIndex].PropertyName = newValue;
+            ((BlackboardField)element).text = newValue;
+        };
+        
+        blackboard.SetPosition(new Rect(10, 30, 200, 140));
+        _graphView.Add(blackboard);
+        _graphView.Blackboard = blackboard;
     }
 
     private void GenerateMiniMap()
     {
         var miniMap = new MiniMap{ anchored = true };
-        miniMap.SetPosition(new Rect(10, 30, 200, 140));
+        var cords = _graphView.contentViewContainer.WorldToLocal(new Vector2(this.position.width - 10, 30));
+        //Dit wordt 1 keer gedaan, als je de window size aanpast doet ie raar, moet nog gefixt worden.
+        miniMap.SetPosition(new Rect(cords.x, cords.y, 200, 140));
         _graphView.Add(miniMap);
     }
 
@@ -74,7 +104,6 @@ public class DialogueGraph : EditorWindow
         if (save)
         {
             saveUtility.SaveGraph(_fileName);
-
         }
         else
         {

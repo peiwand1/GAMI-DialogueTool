@@ -1,25 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
 {
-    private DialogueGraphView graphView;
-    private EditorWindow editorWindow;
-    private Texture2D indentationIcon;
+    private DialogueGraphView _graphView;
+    private EditorWindow _editorWindow;
+    private Texture2D _indentationIcon;
     
     public void Init(EditorWindow editorWindow, DialogueGraphView graphView)
     {
-        this.editorWindow = editorWindow;
-        this.graphView = graphView;
-        indentationIcon = new Texture2D(1, 1);
-        indentationIcon.SetPixel(0,0, new Color(0,0,0,0));
-        indentationIcon.Apply();
+        _editorWindow = editorWindow;
+        _graphView = graphView;
+        _indentationIcon = new Texture2D(1, 1);
+        _indentationIcon.SetPixel(0,0, new Color(0,0,0,0));
+        _indentationIcon.Apply();
     }
     
     public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
@@ -28,7 +25,7 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
         {
             new SearchTreeGroupEntry(new GUIContent("Create Elements"), 0),
             new SearchTreeGroupEntry(new GUIContent("Dialogue Node"), 1),
-            new SearchTreeEntry(new GUIContent("Dialogue Node", indentationIcon))
+            new SearchTreeEntry(new GUIContent("Dialogue Node", _indentationIcon))
             {
                 userData = new DialogueNode(), level = 2
             }
@@ -38,13 +35,13 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
 
     public bool OnSelectEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
     {
-        var worldMousePosition = editorWindow.rootVisualElement.ChangeCoordinatesTo(
-            editorWindow.rootVisualElement.parent, context.screenMousePosition - editorWindow.position.position);
-        var localMousePosition = graphView.contentViewContainer.WorldToLocal(worldMousePosition);
+        var worldMousePosition = _editorWindow.rootVisualElement.ChangeCoordinatesTo(
+            _editorWindow.rootVisualElement.parent, context.screenMousePosition - _editorWindow.position.position);
+        var localMousePosition = _graphView.contentViewContainer.WorldToLocal(worldMousePosition);
         switch (SearchTreeEntry.userData)
         {
             case DialogueNode dialogueNode:
-                graphView.CreateNode("Dialogue Node", localMousePosition);
+                _graphView.CreateNode("Dialogue Node", localMousePosition);
                 return true;
             default:
                 return false;

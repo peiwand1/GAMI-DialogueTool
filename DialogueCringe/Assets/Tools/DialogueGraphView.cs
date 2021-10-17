@@ -1,16 +1,19 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using System.Linq;
+using Tools.Runtime;
+using Tools.Runtime.Properties;
 using UnityEditor;
 
 public class DialogueGraphView : GraphView
 {
     public readonly Vector2 defaultNodeSize = new Vector2(150, 200);
 
+    public Blackboard Blackboard;
+    public List<ExposedStringProperty> ExposedProperties = new List<ExposedStringProperty>();
     private NodeSearchWindow searchWindow;
     
     public DialogueGraphView(EditorWindow editorWindow)
@@ -165,5 +168,45 @@ public class DialogueGraphView : GraphView
         dialogueNode.outputContainer.Remove(generatedPort);
         dialogueNode.RefreshPorts();
         dialogueNode.RefreshExpandedState();
+    }
+
+    public void ClearBlackboardAndExposedProperties()
+    {
+        ExposedProperties.Clear();
+        Blackboard.Clear();
+    }
+
+    public void AddPropertyToBlackboard(ExposedStringProperty exposedStringProperty)
+    {
+        var localPropertyName = exposedStringProperty.PropertyName;
+        var localPropertyValue = exposedStringProperty.PropertyValue;
+
+        while (ExposedProperties.Any(x => x.PropertyName.Equals(localPropertyName)))
+        {
+            localPropertyName = $"{localPropertyName}(1)";
+        }
+
+        var property = new ExposedStringProperty();
+        property.PropertyName = localPropertyName;
+        property.PropertyValue = localPropertyValue;
+        ExposedProperties.Add(property);
+
+        var container = new VisualElement();
+        var blackboardField = new BlackboardField { text = property.PropertyName, typeText = "string" };
+        container.Add(blackboardField);
+
+        var propertyValueTextField = new TextField("Value:")
+        {
+            value = localPropertyValue
+        };
+        propertyValueTextField.RegisterValueChangedCallback(evt =>
+        {
+            var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+            ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
+        });
+        var blackboardValueRow = new BlackboardRow(blackboardField, propertyValueTextField);
+        container.Add(blackboardValueRow);
+        
+        Blackboard.Add(container);
     }
 }
