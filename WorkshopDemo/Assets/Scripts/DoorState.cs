@@ -16,12 +16,12 @@ public class DoorState : MonoBehaviour
     void Open()
     {
         gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 
     void Close()
     {
         gameObject.GetComponent<MeshRenderer>().enabled = true;
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 }
