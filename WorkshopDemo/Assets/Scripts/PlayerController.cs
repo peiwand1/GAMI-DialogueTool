@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveDirection = transform.forward * movementZ + transform.right * movementX;
         rb.MovePosition(transform.position + (moveDirection.normalized*walkingSpeed*Time.deltaTime));
+        rb.angularVelocity = Vector3.zero;
         //rb.AddForce(moveDirection.normalized*walkingSpeed,ForceMode.Acceleration);
     }
 
