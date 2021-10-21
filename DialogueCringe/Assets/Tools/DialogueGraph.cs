@@ -27,10 +27,13 @@ public class DialogueGraph : EditorWindow
 
     private void GenerateBlackboard()
     {
-        var _blackboard = new Blackboard(_graphView);
-        _blackboard.Add(new BlackboardSection { title = "Exposed Properties" });
-        
-        _blackboard.editTextRequested = (blackboard1, element, newValue) =>
+        var blackboard = new Blackboard(_graphView);
+        blackboard.Add(new BlackboardSection { title = "Exposed Properties" });
+        blackboard.addItemRequested = _blackboard =>
+        {
+            _graphView.AddPropertyToBlackboard(new ExposedStringProperty());
+        };
+        blackboard.editTextRequested = (blackboard1, element, newValue) =>
         {
             var oldPropertyName = ((BlackboardField)element).text;
             if (_graphView.ExposedProperties.Any(x => x.PropertyName.ToLower().Equals(newValue.ToLower())))
@@ -44,11 +47,10 @@ public class DialogueGraph : EditorWindow
             _graphView.ExposedProperties[propertyIndex].PropertyName = newValue;
             ((BlackboardField)element).text = newValue;
         };
-
-        _blackboard.SetPosition(new Rect(10, 30, 200, 140));
-        _graphView.Add(_blackboard);
-        _graphView.Blackboard = _blackboard;
-        _graphView.AddPropertySearchWindow(_graphView.EditorWindow);
+        
+        blackboard.SetPosition(new Rect(10, 30, 200, 140));
+        _graphView.Add(blackboard);
+        _graphView.Blackboard = blackboard;
     }
 
     private void GenerateMiniMap()
