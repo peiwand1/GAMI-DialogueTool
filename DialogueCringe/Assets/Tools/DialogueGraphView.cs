@@ -4,24 +4,20 @@ using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using System.Linq;
+using Tools.Runtime;
 using Tools.Runtime.Properties;
 using UnityEditor;
-using UnityEditor.UIElements;
-using Button = UnityEngine.UIElements.Button;
 
 public class DialogueGraphView : GraphView
 {
     public readonly Vector2 defaultNodeSize = new Vector2(150, 200);
 
     public Blackboard Blackboard;
-    public List<ExposedProperty> ExposedProperties = new List<ExposedProperty>();
+    public List<ExposedStringProperty> ExposedProperties = new List<ExposedStringProperty>();
     private NodeSearchWindow searchWindow;
-    private PropertySearchWindow propertySearchWindow;
-    public EditorWindow EditorWindow;
-
+    
     public DialogueGraphView(EditorWindow editorWindow)
     {
-        EditorWindow = editorWindow;
         styleSheets.Add(Resources.Load<StyleSheet>("DialogueGraph"));
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
         
@@ -43,14 +39,6 @@ public class DialogueGraphView : GraphView
         searchWindow.Init(editorWindow, this);
         nodeCreationRequest = context =>
             SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
-    }
-    
-    public void AddPropertySearchWindow(EditorWindow editorWindow)
-    {
-        propertySearchWindow = ScriptableObject.CreateInstance<PropertySearchWindow>();
-        propertySearchWindow.Init(editorWindow, this);
-        Blackboard.addItemRequested = context =>
-            SearchWindow.Open(new SearchWindowContext(new Vector2(50,50)), propertySearchWindow);
     }
 
     public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
@@ -188,78 +176,35 @@ public class DialogueGraphView : GraphView
         Blackboard.Clear();
     }
 
-    public void AddPropertyToBlackboard(ExposedProperty exposedProperty)
+    public void AddPropertyToBlackboard(ExposedStringProperty exposedStringProperty)
     {
-        var localPropertyName = exposedProperty.PropertyName;
-        var localPropertyType = exposedProperty.PropertyType;
+        var localPropertyName = exposedStringProperty.PropertyName;
+        var localPropertyValue = exposedStringProperty.PropertyValue;
 
         while (ExposedProperties.Any(x => x.PropertyName.Equals(localPropertyName)))
         {
             localPropertyName = $"{localPropertyName}(1)";
         }
 
-        ExposedProperty property = new ExposedProperty(localPropertyType);
+        var property = new ExposedStringProperty();
         property.PropertyName = localPropertyName;
+        property.PropertyValue = localPropertyValue;
         ExposedProperties.Add(property);
 
         var container = new VisualElement();
-        dynamic propertyValueField = new TextField("Value:")
-        {
-            value = "placeholder"
-        };
-        var blackboardField = new BlackboardField { text = property.PropertyName, typeText = "" };
-        
-        switch (localPropertyType)
-        {
-            case "String":
-                String placeholder = "New String";
-                blackboardField.typeText = "string";
-                propertyValueField = new TextField("Value:")
-                {
-                    value = placeholder
-                };
-                property.PropertyValue = placeholder;
-                break;
-            case "Boolean": 
-                bool boolValuePlaceholder = true;
-                blackboardField.typeText = "boolean";
-                propertyValueField = new Toggle("Value:")
-                {
-                    value = boolValuePlaceholder
-                };
-                property.PropertyValue = boolValuePlaceholder;
-                break;
-            case "Integer":
-                int intValue = 0;
-                blackboardField.typeText = "integer";
-                propertyValueField = new IntegerField("Value:")
-                {
-                    value = intValue
-                    
-                };
-                property.PropertyValue = intValue;
-                break;
-            
-            case "Float":
-                float floatValue = 0.0f;
-                blackboardField.typeText = "float";
-                propertyValueField = new FloatField("Value:")
-                {
-                    value = floatValue
-                    
-                };
-                property.PropertyValue = floatValue;
-                break;
-        }
-        
-        // propertyValueField.RegisterValueChangedCallback(evt =>
-        // {
-        //     var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
-        //     ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
-        // });
-        
+        var blackboardField = new BlackboardField { text = property.PropertyName, typeText = "string" };
         container.Add(blackboardField);
-        var blackboardValueRow = new BlackboardRow(blackboardField, propertyValueField);
+
+        var propertyValueTextField = new TextField("Value:")
+        {
+            value = localPropertyValue
+        };
+        propertyValueTextField.RegisterValueChangedCallback(evt =>
+        {
+            var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+            ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
+        });
+        var blackboardValueRow = new BlackboardRow(blackboardField, propertyValueTextField);
         container.Add(blackboardValueRow);
         
         Blackboard.Add(container);
