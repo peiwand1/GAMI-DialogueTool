@@ -53,16 +53,16 @@ public class PropertySearchWindow : ScriptableObject, ISearchWindowProvider
         switch (SearchTreeEntry.userData)
         {
             case "String":
-                _graphView.AddPropertyToBlackboard(new ExposedProperty("String"));
+                _graphView.AddPropertyToBlackboard(new ExposedProperty("New String Property","String"));
                 return true;
             case "Boolean":
-                _graphView.AddPropertyToBlackboard(new ExposedProperty("Boolean"));
+                _graphView.AddPropertyToBlackboard(new ExposedProperty("New Boolean Property","Boolean"));
                 return true;
             case "Integer":
-                _graphView.AddPropertyToBlackboard(new ExposedProperty("Integer"));
+                _graphView.AddPropertyToBlackboard(new ExposedProperty("New Integer Property","Integer"));
                 return true;
             case "Float":
-                _graphView.AddPropertyToBlackboard(new ExposedProperty("Float"));
+                _graphView.AddPropertyToBlackboard(new ExposedProperty("New Float Property","Float"));
                 return true;
             default:
                 return false;

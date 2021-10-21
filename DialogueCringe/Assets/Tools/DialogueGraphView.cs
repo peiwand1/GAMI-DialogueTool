@@ -198,7 +198,7 @@ public class DialogueGraphView : GraphView
             localPropertyName = $"{localPropertyName}(1)";
         }
 
-        ExposedProperty property = new ExposedProperty(localPropertyType);
+        ExposedProperty property = new ExposedProperty(localPropertyName, localPropertyType);
         property.PropertyName = localPropertyName;
         ExposedProperties.Add(property);
 
