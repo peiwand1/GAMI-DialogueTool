@@ -35,7 +35,7 @@ namespace Subtegral.DialogueSystem.Runtime
             foreach (var choice in choices)
             {
                 var button = Instantiate(choicePrefab, buttonContainer);
-                button.GetComponentInChildren<Text>().text = ProcessProperties(choice.PortName);
+                button.GetComponentInChildren<TextMeshProUGUI>().text = ProcessProperties(choice.PortName);
                 button.onClick.AddListener(() => ProceedToNarrative(choice.TargetNodeGuid));
             }
         }
