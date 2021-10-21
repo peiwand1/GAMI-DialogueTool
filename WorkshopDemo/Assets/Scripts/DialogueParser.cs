@@ -15,6 +15,9 @@ namespace Subtegral.DialogueSystem.Runtime
         [SerializeField] private Button choicePrefab;
         [SerializeField] private Transform buttonContainer;
 
+        [SerializeField] private GameObject doorRight;
+        [SerializeField] private GameObject doorLeft;
+
         private void Start()
         {
             var narrativeData = dialogue.NodeLinks.First(); //Entrypoint node
@@ -36,8 +39,15 @@ namespace Subtegral.DialogueSystem.Runtime
             {
                 var button = Instantiate(choicePrefab, buttonContainer);
                 button.GetComponentInChildren<TextMeshProUGUI>().text = ProcessProperties(choice.PortName);
-                button.onClick.AddListener(() => ProceedToNarrative(choice.TargetNodeGuid));
+                button.onClick.AddListener(() => HandleChoice(choice));
             }
+        }
+
+        private void HandleChoice(NodeLinkData choice) {
+            if (choice.PortName == "Bread") {
+                doorLeft.gameObject.GetComponent<DoorState>().Open();
+            }
+            ProceedToNarrative(choice.TargetNodeGuid);
         }
 
         private string ProcessProperties(string text)
