@@ -257,7 +257,7 @@ public class DialogueGraphView : GraphView
         //     var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
         //     ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
         // });
-        
+
         container.Add(blackboardField);
         var blackboardValueRow = new BlackboardRow(blackboardField, propertyValueField);
         container.Add(blackboardValueRow);

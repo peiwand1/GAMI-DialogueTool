@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6727c9ba1c50774ab6f4ea163ef5eda, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  DialogueNodeData:
+  - NodeGUID: f35527d0-1309-465b-92b1-485e69a104b8
+    DialogueText: Node 1
+    Position: {x: 394, y: 190}
+  - NodeGUID: 79d36767-944e-4156-99bf-7d5357fdc5f4
+    DialogueText: Dialogue Node
+    Position: {x: 1096, y: 374}
+  - NodeGUID: 9f67228c-4f18-4e83-8de3-eedee820f633
+    DialogueText: Dialogue Node
+    Position: {x: 1096, y: 92}
+  - NodeGUID: 88cf2876-8ba5-41b4-a027-049c12153e2f
+    DialogueText: Node 2
+    Position: {x: 793, y: 190}
+  - NodeGUID: bdcbc0bd-8570-4af4-bd9a-bf5de72eba04
+    DialogueText: Dialogue Node
+    Position: {x: 1477, y: 228}
+  NodeLinks:
+  - BaseNodeGuid: 3bfd354e-ab17-4ef9-bcc8-c2c53114cd36
+    PortName: Next
+    TargetNodeGuid: f35527d0-1309-465b-92b1-485e69a104b8
+  - BaseNodeGuid: test
+    PortName: test
+    TargetNodeGuid: test
+  - BaseNodeGuid: f35527d0-1309-465b-92b1-485e69a104b8
+    PortName: Hey
+    TargetNodeGuid: 88cf2876-8ba5-41b4-a027-049c12153e2f
+  - BaseNodeGuid: test
+    PortName: test
+    TargetNodeGuid: test
+  - BaseNodeGuid: 88cf2876-8ba5-41b4-a027-049c12153e2f
+    PortName: Choice 1
+    TargetNodeGuid: 9f67228c-4f18-4e83-8de3-eedee820f633
+  - BaseNodeGuid: test
+    PortName: test
+    TargetNodeGuid: test
+  - BaseNodeGuid: 88cf2876-8ba5-41b4-a027-049c12153e2f
+    PortName: Choice 2
+    TargetNodeGuid: 79d36767-944e-4156-99bf-7d5357fdc5f4
+  - BaseNodeGuid: test
+    PortName: test
+    TargetNodeGuid: test
+  - BaseNodeGuid: 9f67228c-4f18-4e83-8de3-eedee820f633
+    PortName: Choice 1
+    TargetNodeGuid: bdcbc0bd-8570-4af4-bd9a-bf5de72eba04
+  - BaseNodeGuid: test
+    PortName: test
+    TargetNodeGuid: test
+  - BaseNodeGuid: 79d36767-944e-4156-99bf-7d5357fdc5f4
+    PortName: Choice 1
+    TargetNodeGuid: bdcbc0bd-8570-4af4-bd9a-bf5de72eba04
+  - BaseNodeGuid: test
+    PortName: test
+    TargetNodeGuid: test
+  ExposedProperties:
+  - PropertyName: New String Property
+    PropertyType: String
+  - PropertyName: New Boolean Property
+    PropertyType: Boolean
+  - PropertyName: New Integer Property
+    PropertyType: Integer
+  - PropertyName: New Float Property
+    PropertyType: Float
