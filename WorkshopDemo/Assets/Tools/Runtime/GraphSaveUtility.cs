@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Tools.Runtime.Properties;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -100,7 +101,15 @@ public class GraphSaveUtility
 
     private void SaveExposedProperties(DialogueContainer dialogueContainer)
     {
-        dialogueContainer.ExposedProperties.AddRange(_targetGraphView.ExposedProperties);
+        foreach (var exposedProperty in _targetGraphView.ExposedProperties)
+        {
+            dialogueContainer.ExposedProperties.Add(new ExposedPropertyData
+            { 
+                PropertyName = exposedProperty.PropertyName,
+                PropertyValue = exposedProperty.PropertyValue,
+                PropertyType = exposedProperty.PropertyType
+            });
+        }
     }
 
     public void LoadGraph(string fileName)
@@ -121,8 +130,10 @@ public class GraphSaveUtility
     private void CreateExposedProperties()
     {
         _targetGraphView.ClearBlackboardAndExposedProperties();
-        foreach (var exposedProperty in _containerCache.ExposedProperties)
+        foreach (var exposedPropertyData in _containerCache.ExposedProperties)
         {
+            ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
+            exposedProperty.PropertyValue = exposedPropertyData.PropertyValue;
             _targetGraphView.AddPropertyToBlackboard(exposedProperty);
         }
     }

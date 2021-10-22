@@ -12,5 +12,5 @@ public class DialogueContainer : ScriptableObject
 
     public List<NodeLinkData> NodeLinks = new List<NodeLinkData>();
     
-    public List<ExposedStringProperty> ExposedProperties = new List<ExposedStringProperty>();
+    public List<ExposedPropertyData> ExposedProperties = new List<ExposedPropertyData>();
 }
