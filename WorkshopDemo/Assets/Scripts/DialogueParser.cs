@@ -1,62 +1,73 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Subtegral.DialogueSystem.Runtime
+public class DialogueParser : MonoBehaviour
 {
-    public class DialogueParser : MonoBehaviour
+
+    [SerializeField] private Button choicePrefab;
+    [SerializeField] private GameObject dialogueBox;
+
+    private DialogueContainer dialogue;
+    private TextMeshProUGUI dialogueText;
+    private Transform buttonContainer;
+
+    private void Start() {
+        dialogueText = dialogueBox.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+        buttonContainer = dialogueBox.transform.Find("ButtonHandler").GetComponent<Transform>();
+    }
+
+    public void EnableDialogue() {
+        dialogueBox.gameObject.SetActive(true);
+    }
+
+    public void DisableDialogue() {
+        dialogueBox.gameObject.SetActive(false);
+    }
+
+    public void StartDialogue(DialogueContainer dialogue) {
+        this.dialogue = dialogue;
+        ProceedToNarrative(dialogue.NodeLinks.First().TargetNodeGuid);
+    }  
+
+    private void ProceedToNarrative(string narrativeDataGUID)
     {
-        [SerializeField] private DialogueContainer dialogue;
-        [SerializeField] private TextMeshProUGUI dialogueText;
-        [SerializeField] private Button choicePrefab;
-        [SerializeField] private Transform buttonContainer;
+        RemoveButtons();
+        var text = dialogue.DialogueNodeData.Find(x => x.NodeGUID == narrativeDataGUID).DialogueText;
+        dialogueText.text = ProcessProperties(text);
+        AddChoiceButtons(narrativeDataGUID);
+    }
 
-        [SerializeField] private GameObject doorRight;
-        [SerializeField] private GameObject doorLeft;
-
-        private void Start()
+    private void RemoveButtons() {
+       var buttons = buttonContainer.GetComponentsInChildren<Button>();
+        for (int i = 0; i < buttons.Length; i++)
         {
-            var narrativeData = dialogue.NodeLinks.First(); //Entrypoint node
-            ProceedToNarrative(narrativeData.TargetNodeGuid);
-        }
+            Destroy(buttons[i].gameObject);
+        } 
+    }
 
-        private void ProceedToNarrative(string narrativeDataGUID)
+    private void AddChoiceButtons(string narrativeDataGUID) {
+        var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
+        foreach (var choice in choices)
         {
-            var text = dialogue.DialogueNodeData.Find(x => x.NodeGUID == narrativeDataGUID).DialogueText;
-            var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
-            dialogueText.text = ProcessProperties(text);
-            var buttons = buttonContainer.GetComponentsInChildren<Button>();
-            for (int i = 0; i < buttons.Length; i++)
-            {
-                Destroy(buttons[i].gameObject);
-            }
-
-            foreach (var choice in choices)
-            {
-                var button = Instantiate(choicePrefab, buttonContainer);
-                button.GetComponentInChildren<TextMeshProUGUI>().text = ProcessProperties(choice.PortName);
-                button.onClick.AddListener(() => HandleChoice(choice));
-            }
+            var button = Instantiate(choicePrefab, buttonContainer);
+            button.GetComponentInChildren<TextMeshProUGUI>().text = ProcessProperties(choice.PortName);
+            button.onClick.AddListener(() => HandleChoice(choice));
         }
+    }
+    private void HandleChoice(NodeLinkData choice) {
+        ChoiceHandler choiceHandler = gameObject.GetComponent<ChoiceHandler>();
+        choiceHandler.HandleChoice(choice);
+        ProceedToNarrative(choice.TargetNodeGuid);
+    }
 
-        private void HandleChoice(NodeLinkData choice) {
-            if (choice.PortName == "Bread") {
-                doorLeft.gameObject.GetComponent<DoorState>().Open();
-            }
-            ProceedToNarrative(choice.TargetNodeGuid);
-        }
-
-        private string ProcessProperties(string text)
+    private string ProcessProperties(string text)
+    {
+        foreach (var exposedProperty in dialogue.ExposedProperties)
         {
-            foreach (var exposedProperty in dialogue.ExposedProperties)
-            {
-                text = text.Replace($"[{exposedProperty.PropertyName}]", exposedProperty.PropertyValue);
-            }
-            return text;
+            text = text.Replace($"[{exposedProperty.PropertyName}]", exposedProperty.PropertyValue);
         }
+        return text;
     }
 }
