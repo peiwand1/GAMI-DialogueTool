@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Tools.Runtime.Properties;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -158,28 +157,24 @@ public class GraphSaveUtility
         foreach (var exposedPropertyData in _containerCache.ExposedStringProperties)
         {
             ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
-            Debug.Log("Load: " + exposedProperty.PropertyValue);
             exposedProperty.PropertyValue = exposedPropertyData.PropertyValue;
             _targetGraphView.AddPropertyToBlackboard(exposedProperty);
         }
         foreach (var exposedPropertyData in _containerCache.ExposedBooleanProperties)
         {
             ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
-            Debug.Log("Load: " + exposedProperty.PropertyValue);
             exposedProperty.PropertyValue = exposedPropertyData.PropertyValue;
             _targetGraphView.AddPropertyToBlackboard(exposedProperty);
         }
         foreach (var exposedPropertyData in _containerCache.ExposedIntegerProperties)
         {
             ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
-            Debug.Log("Load: " + exposedProperty.PropertyValue);
             exposedProperty.PropertyValue = exposedPropertyData.PropertyValue;
             _targetGraphView.AddPropertyToBlackboard(exposedProperty);
         }
         foreach (var exposedPropertyData in _containerCache.ExposedFloatProperties)
         {
             ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
-            Debug.Log("Load: " + exposedProperty.PropertyValue);
             exposedProperty.PropertyValue = exposedPropertyData.PropertyValue;
             _targetGraphView.AddPropertyToBlackboard(exposedProperty);
         }

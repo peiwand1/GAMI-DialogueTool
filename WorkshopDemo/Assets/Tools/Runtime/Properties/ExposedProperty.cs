@@ -1,7 +1,4 @@
-﻿using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.NCalc;
-
-namespace Tools.Runtime.Properties
+﻿namespace Tools.Runtime.Properties
 {
     public class ExposedProperty
     {

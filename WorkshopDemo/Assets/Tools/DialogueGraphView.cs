@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using System.Linq;
-using System.Reflection.Emit;
 using Tools.Runtime.Properties;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -44,7 +43,20 @@ public class DialogueGraphView : GraphView
         searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
         searchWindow.Init(editorWindow, this);
         nodeCreationRequest = context =>
+        {
+            Debug.Log(context.screenMousePosition);
+            if (context.screenMousePosition.x == 0 && context.screenMousePosition.y == 0)
+            {
+                context.screenMousePosition.x = 1000;
+                context.screenMousePosition.y = 450;
+            }
             SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
+        };
+    }
+
+    public void OpenSearchWindow()
+    {
+        nodeCreationRequest.Invoke(default);
     }
     
     public void AddPropertySearchWindow(EditorWindow editorWindow)

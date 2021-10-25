@@ -1,15 +1,18 @@
+using System;
 using System.Linq;
-using Tools.Runtime.Properties;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.Timeline.Actions;
 
 public class DialogueGraph : EditorWindow
 {
     private DialogueGraphView _graphView;
     private string _fileName = "New Narrative";
+    private MiniMap _miniMap;
+    
     [MenuItem("Graph/Dialogue Graph")]
     public static void OpenDialogueGraphWindow()
     {
@@ -53,11 +56,10 @@ public class DialogueGraph : EditorWindow
 
     private void GenerateMiniMap()
     {
-        var miniMap = new MiniMap{ anchored = true };
-        var cords = _graphView.contentViewContainer.WorldToLocal(new Vector2(this.position.width - 10, 30));
-        //Dit wordt 1 keer gedaan, als je de window size aanpast doet ie raar, moet nog gefixt worden.
-        miniMap.SetPosition(new Rect(cords.x, cords.y, 200, 140));
-        _graphView.Add(miniMap);
+        _miniMap = new MiniMap{ anchored = true };
+        var cords = _graphView.contentViewContainer.WorldToLocal(new Vector2(position.width - 10, 30));
+        _miniMap.SetPosition(new Rect(cords.x, cords.y, 200, 140));
+        _graphView.Add(_miniMap);
     }
 
     private void OnDisable()
@@ -87,6 +89,7 @@ public class DialogueGraph : EditorWindow
 
         toolbar.Add(new Button(() => RequestDataOperation(true)) { text = "Save Data" });
         toolbar.Add(new Button(() => RequestDataOperation(false)) { text = "Load Data" });
+        toolbar.Add(new Button(() => _graphView.OpenSearchWindow()) { text = "New Node" });
         toolbar.Add(new Button(() => NewGraph()) { text = "New Graph" });
 
         rootVisualElement.Add(toolbar);
