@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Tools.Runtime.Properties;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Edge = UnityEditor.Experimental.GraphView.Edge;
 
 public class GraphSaveUtility
 {
@@ -109,6 +111,8 @@ public class GraphSaveUtility
                 PropertyValue = exposedProperty.PropertyValue,
                 PropertyType = exposedProperty.PropertyType
             });
+            
+            Debug.Log("Save: " + exposedProperty.PropertyValue);
         }
     }
 
@@ -133,6 +137,7 @@ public class GraphSaveUtility
         foreach (var exposedPropertyData in _containerCache.ExposedProperties)
         {
             ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
+            Debug.Log("Load: " + exposedProperty.PropertyValue);
             exposedProperty.PropertyValue = exposedPropertyData.PropertyValue;
             _targetGraphView.AddPropertyToBlackboard(exposedProperty);
         }

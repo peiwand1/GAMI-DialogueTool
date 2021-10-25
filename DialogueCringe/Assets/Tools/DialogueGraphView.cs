@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using System.Linq;
+using System.Reflection.Emit;
 using Tools.Runtime.Properties;
 using UnityEditor;
 using UnityEditor.UIElements;
 using Button = UnityEngine.UIElements.Button;
+using Label = UnityEngine.UIElements.Label;
 
 public class DialogueGraphView : GraphView
 {
@@ -191,6 +193,7 @@ public class DialogueGraphView : GraphView
     public void AddPropertyToBlackboard(ExposedProperty exposedProperty)
     {
         var localPropertyName = exposedProperty.PropertyName;
+        var localPropertyValue = exposedProperty.PropertyValue;
         var localPropertyType = exposedProperty.PropertyType;
 
         while (ExposedProperties.Any(x => x.PropertyName.Equals(localPropertyName)))
@@ -203,61 +206,94 @@ public class DialogueGraphView : GraphView
         ExposedProperties.Add(property);
 
         var container = new VisualElement();
-        dynamic propertyValueField = new TextField("Value:")
-        {
-            value = "placeholder"
-        };
+        dynamic propertyValueField = new TextField();
         var blackboardField = new BlackboardField { text = property.PropertyName, typeText = "" };
-        
+
         switch (localPropertyType)
         {
             case "String":
-                String placeholder = "New String";
+                if (localPropertyValue == null)
+                {
+                    localPropertyValue = "New String";
+                }
+                
                 blackboardField.typeText = "string";
                 propertyValueField = new TextField("Value:")
                 {
-                    value = placeholder
+                    value = localPropertyValue
                 };
-                property.PropertyValue = placeholder;
+                property.PropertyValue = localPropertyValue;
+                
+                ((TextField)propertyValueField).RegisterValueChangedCallback(evt =>
+                {
+                    var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+                    ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
+                });
+                
                 break;
-            case "Boolean": 
-                bool boolValuePlaceholder = true;
+            case "Boolean":
+                if (localPropertyValue == null)
+                {
+                    localPropertyValue = true;
+                }
+
                 blackboardField.typeText = "boolean";
                 propertyValueField = new Toggle("Value:")
                 {
-                    value = boolValuePlaceholder
+                    value = localPropertyValue
                 };
-                property.PropertyValue = boolValuePlaceholder;
+                property.PropertyValue = localPropertyValue;
+                
+                ((Toggle)propertyValueField).RegisterValueChangedCallback(evt =>
+                {
+                    var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+                    ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
+                });
+                
                 break;
             case "Integer":
-                int intValue = 0;
+                if (localPropertyValue == null)
+                {
+                    localPropertyValue = 0;
+                }
                 blackboardField.typeText = "integer";
                 propertyValueField = new IntegerField("Value:")
                 {
-                    value = intValue
-                    
+                    value = localPropertyValue
+
                 };
-                property.PropertyValue = intValue;
+                property.PropertyValue = localPropertyValue;
+                
+                ((IntegerField)propertyValueField).RegisterValueChangedCallback(evt =>
+                {
+                    var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+                    ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
+                });
+                
                 break;
-            
+
             case "Float":
-                float floatValue = 0.0f;
+                if (localPropertyValue == null)
+                {
+                    localPropertyValue = 0.0f;
+                }
+                
                 blackboardField.typeText = "float";
                 propertyValueField = new FloatField("Value:")
                 {
-                    value = floatValue
-                    
+                    value = localPropertyValue
+
                 };
-                property.PropertyValue = floatValue;
+                property.PropertyValue = localPropertyValue;
+                
+                ((FloatField)propertyValueField).RegisterValueChangedCallback(evt =>
+                {
+                    var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+                    ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
+                });
+                
                 break;
         }
-        
-        // propertyValueField.RegisterValueChangedCallback(evt =>
-        // {
-        //     var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
-        //     ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
-        // });
-
         container.Add(blackboardField);
         var blackboardValueRow = new BlackboardRow(blackboardField, propertyValueField);
         container.Add(blackboardValueRow);

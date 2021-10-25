@@ -1,12 +1,13 @@
-﻿using Unity.VisualScripting.Dependencies.NCalc;
+﻿using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.NCalc;
 
 namespace Tools.Runtime.Properties
 {
     public class ExposedProperty
     {
         public string PropertyName;
-        public dynamic PropertyValue;
         public string PropertyType;
+        public dynamic PropertyValue;
 
         public ExposedProperty(string propertyName, string propertyType)
         {
