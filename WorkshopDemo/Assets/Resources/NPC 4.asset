@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6727c9ba1c50774ab6f4ea163ef5eda, type: 3}
+  m_Name: NPC 4
+  m_EditorClassIdentifier: 
+  DialogueNodeData:
+  - NodeGUID: 4c46cd1a-c6dc-4f78-babe-158ca71f95aa
+    DialogueText: 'Bool Choice: {bool}'
+    Position: {x: 496, y: 254}
+  - NodeGUID: 6cdf38e4-95e0-4b4f-b89d-3273b3801933
+    DialogueText: 'Int Choice: {int}'
+    Position: {x: 496, y: 363}
+  - NodeGUID: 321e81ce-464e-403f-ac1e-1c9aff33d787
+    DialogueText: 'Float Choice: {float}'
+    Position: {x: 496, y: 473}
+  - NodeGUID: 5917af29-13b1-4cf3-b6b8-90a107da9b90
+    DialogueText: 'String Choice: {string}'
+    Position: {x: 496, y: 137}
+  - NodeGUID: 81586d55-2458-4d5a-ad12-f41c647d811b
+    DialogueText: Test Choices
+    Position: {x: 176, y: 254}
+  NodeLinks:
+  - BaseNodeGuid: 60778ec3-a832-4416-9795-12729a74d544
+    PortName: Next
+    TargetNodeGuid: 81586d55-2458-4d5a-ad12-f41c647d811b
+  - BaseNodeGuid: 81586d55-2458-4d5a-ad12-f41c647d811b
+    PortName: '{string}'
+    TargetNodeGuid: 5917af29-13b1-4cf3-b6b8-90a107da9b90
+  - BaseNodeGuid: 81586d55-2458-4d5a-ad12-f41c647d811b
+    PortName: '{bool}'
+    TargetNodeGuid: 4c46cd1a-c6dc-4f78-babe-158ca71f95aa
+  - BaseNodeGuid: 81586d55-2458-4d5a-ad12-f41c647d811b
+    PortName: '{int}'
+    TargetNodeGuid: 6cdf38e4-95e0-4b4f-b89d-3273b3801933
+  - BaseNodeGuid: 81586d55-2458-4d5a-ad12-f41c647d811b
+    PortName: '{float}'
+    TargetNodeGuid: 321e81ce-464e-403f-ac1e-1c9aff33d787
+  ExposedStringProperties:
+  - PropertyName: string
+    PropertyValue: Bread
+    PropertyType: String
+  ExposedBooleanProperties:
+  - PropertyName: bool
+    PropertyValue: 1
+    PropertyType: Boolean
+  ExposedIntegerProperties:
+  - PropertyName: int
+    PropertyValue: 4
+    PropertyType: Integer
+  ExposedFloatProperties:
+  - PropertyName: float
+    PropertyValue: 3.14
+    PropertyType: Float

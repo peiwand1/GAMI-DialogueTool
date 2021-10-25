@@ -10,44 +10,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6727c9ba1c50774ab6f4ea163ef5eda, type: 3}
-  m_Name: Door1 Narrative
+  m_Name: NPC 1
   m_EditorClassIdentifier: 
   DialogueNodeData:
   - NodeGUID: 26f342ad-7537-4503-8e1e-9f6daf98c73e
-    DialogueText: Hello Tanguy
+    DialogueText: Hello, {PlayerName}
     Position: {x: 259, y: 179}
-  - NodeGUID: 315d4bef-8534-458e-82e8-dbf8ca16eb50
-    DialogueText: Right Door
-    Position: {x: 1130, y: 290}
   - NodeGUID: 10344947-d37d-40db-be93-ba19980af4b3
     DialogueText: You have two choices. Which door do you want to open?
     Position: {x: 570, y: 179}
   - NodeGUID: a2de3242-5b04-42a0-bd34-1b396df3f460
     DialogueText: Left Door
     Position: {x: 1130, y: 96}
+  - NodeGUID: 315d4bef-8534-458e-82e8-dbf8ca16eb50
+    DialogueText: Right Door
+    Position: {x: 1150, y: 241}
+  - NodeGUID: 6aa74cf9-32ce-4440-be13-a4adce7c856e
+    DialogueText: You stupid
+    Position: {x: 1150, y: 391}
   NodeLinks:
   - BaseNodeGuid: bc1f32aa-27f4-496d-9a78-9a6211dc513e
     PortName: Next
     TargetNodeGuid: 26f342ad-7537-4503-8e1e-9f6daf98c73e
-  - BaseNodeGuid: test
-    PortName: test
-    TargetNodeGuid: test
-  - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
-    PortName: Left Door
-    TargetNodeGuid: a2de3242-5b04-42a0-bd34-1b396df3f460
-  - BaseNodeGuid: test
-    PortName: test
-    TargetNodeGuid: test
-  - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
-    PortName: Right Door
-    TargetNodeGuid: 315d4bef-8534-458e-82e8-dbf8ca16eb50
-  - BaseNodeGuid: test
-    PortName: test
-    TargetNodeGuid: test
   - BaseNodeGuid: 26f342ad-7537-4503-8e1e-9f6daf98c73e
     PortName: Continue
     TargetNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
-  - BaseNodeGuid: test
-    PortName: test
-    TargetNodeGuid: test
-  ExposedProperties: []
+  - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
+    PortName: Left Door
+    TargetNodeGuid: a2de3242-5b04-42a0-bd34-1b396df3f460
+  - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
+    PortName: Right Door
+    TargetNodeGuid: 315d4bef-8534-458e-82e8-dbf8ca16eb50
+  - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
+    PortName: Idk
+    TargetNodeGuid: 6aa74cf9-32ce-4440-be13-a4adce7c856e
+  ExposedStringProperties:
+  - PropertyName: PlayerName
+    PropertyValue: Tanguy
+    PropertyType: String
+  ExposedBooleanProperties:
+  - PropertyName: TestBool
+    PropertyValue: 0
+    PropertyType: Boolean
+  ExposedIntegerProperties: []
+  ExposedFloatProperties: []

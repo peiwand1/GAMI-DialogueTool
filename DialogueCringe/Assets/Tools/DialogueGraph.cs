@@ -62,7 +62,7 @@ public class DialogueGraph : EditorWindow
 
     private void OnDisable()
     {
-        rootVisualElement.Remove(_graphView);
+        rootVisualElement.Clear();
     }
 
     private void ConstructGraphView()
@@ -87,8 +87,15 @@ public class DialogueGraph : EditorWindow
 
         toolbar.Add(new Button(() => RequestDataOperation(true)) { text = "Save Data" });
         toolbar.Add(new Button(() => RequestDataOperation(false)) { text = "Load Data" });
+        toolbar.Add(new Button(() => NewGraph()) { text = "New Graph" });
 
         rootVisualElement.Add(toolbar);
+    }
+
+    private void NewGraph()
+    {
+        OnDisable();
+        OnEnable();
     }
 
     private void RequestDataOperation(bool save)

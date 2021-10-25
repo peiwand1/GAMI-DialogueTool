@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC1Handler : MonoBehaviour
+public class NPCHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
     [SerializeField] private DialogueContainer dialogue;
     private DialogueParser parser;
     private bool isSpeaking;

@@ -20,19 +20,16 @@ MonoBehaviour:
   - BaseNodeGuid: 4cc7d1b8-6ed3-40bc-b184-03969273489a
     PortName: Next
     TargetNodeGuid: 199b08e1-f868-4c33-a7a7-8dbd8ecb3bbf
-  - BaseNodeGuid: test
-    PortName: test
-    TargetNodeGuid: test
   ExposedStringProperties:
   - PropertyName: Kaas
-    PropertyValue: Kaas
+    PropertyValue: Kaas + Bread
     PropertyType: String
   ExposedBooleanProperties:
   - PropertyName: Booooolean
     PropertyValue: 0
     PropertyType: Boolean
   - PropertyName: New Boolean
-    PropertyValue: 1
+    PropertyValue: 0
     PropertyType: Boolean
   ExposedIntegerProperties:
   - PropertyName: Inte
