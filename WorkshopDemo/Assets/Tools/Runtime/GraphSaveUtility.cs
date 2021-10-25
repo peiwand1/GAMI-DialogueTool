@@ -41,12 +41,6 @@ public class GraphSaveUtility
                 PortName = connectedPorts[i].output.portName,
                 TargetNodeGuid = inputNode.GUID
             });
-            dialogueContainer.NodeLinks.Add(new NodeLinkData
-            {
-                BaseNodeGuid = "test",
-                PortName = "test",
-                TargetNodeGuid = "test"
-            });
         }
 
         foreach (var dialogueNode in Nodes.Where(node => !node.Entrypoint))
