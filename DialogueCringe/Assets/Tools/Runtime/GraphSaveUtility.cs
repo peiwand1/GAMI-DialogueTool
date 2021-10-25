@@ -105,14 +105,41 @@ public class GraphSaveUtility
     {
         foreach (var exposedProperty in _targetGraphView.ExposedProperties)
         {
-            dialogueContainer.ExposedProperties.Add(new ExposedPropertyData
-            { 
-                PropertyName = exposedProperty.PropertyName,
-                PropertyValue = exposedProperty.PropertyValue,
-                PropertyType = exposedProperty.PropertyType
-            });
-            
-            Debug.Log("Save: " + exposedProperty.PropertyValue);
+            switch (exposedProperty.PropertyType)
+            {
+                case "String":
+                    dialogueContainer.ExposedStringProperties.Add(new ExposedStringPropertyData
+                    { 
+                        PropertyName = exposedProperty.PropertyName,
+                        PropertyValue = exposedProperty.PropertyValue,
+                        PropertyType = exposedProperty.PropertyType
+                    });
+                    break;
+                case "Boolean":
+                    dialogueContainer.ExposedBooleanProperties.Add(new ExposedBooleanPropertyData
+                    { 
+                        PropertyName = exposedProperty.PropertyName,
+                        PropertyValue = exposedProperty.PropertyValue,
+                        PropertyType = exposedProperty.PropertyType
+                    });
+                    break;
+                case "Integer":
+                    dialogueContainer.ExposedIntegerProperties.Add(new ExposedIntegerPropertyData
+                    { 
+                        PropertyName = exposedProperty.PropertyName,
+                        PropertyValue = exposedProperty.PropertyValue,
+                        PropertyType = exposedProperty.PropertyType
+                    });
+                    break;
+                case "Float":
+                    dialogueContainer.ExposedFloatProperties.Add(new ExposedFloatPropertyData
+                    { 
+                        PropertyName = exposedProperty.PropertyName,
+                        PropertyValue = exposedProperty.PropertyValue,
+                        PropertyType = exposedProperty.PropertyType
+                    });
+                    break;
+            }
         }
     }
 
@@ -128,13 +155,34 @@ public class GraphSaveUtility
         ClearGraph();
         CreateNodes();
         ConnectNodes();
-        CreateExposedProperties();
+        LoadExposedProperties();
     }
 
-    private void CreateExposedProperties()
+    private void LoadExposedProperties()
     {
         _targetGraphView.ClearBlackboardAndExposedProperties();
-        foreach (var exposedPropertyData in _containerCache.ExposedProperties)
+        foreach (var exposedPropertyData in _containerCache.ExposedStringProperties)
+        {
+            ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
+            Debug.Log("Load: " + exposedProperty.PropertyValue);
+            exposedProperty.PropertyValue = exposedPropertyData.PropertyValue;
+            _targetGraphView.AddPropertyToBlackboard(exposedProperty);
+        }
+        foreach (var exposedPropertyData in _containerCache.ExposedBooleanProperties)
+        {
+            ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
+            Debug.Log("Load: " + exposedProperty.PropertyValue);
+            exposedProperty.PropertyValue = exposedPropertyData.PropertyValue;
+            _targetGraphView.AddPropertyToBlackboard(exposedProperty);
+        }
+        foreach (var exposedPropertyData in _containerCache.ExposedIntegerProperties)
+        {
+            ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
+            Debug.Log("Load: " + exposedProperty.PropertyValue);
+            exposedProperty.PropertyValue = exposedPropertyData.PropertyValue;
+            _targetGraphView.AddPropertyToBlackboard(exposedProperty);
+        }
+        foreach (var exposedPropertyData in _containerCache.ExposedFloatProperties)
         {
             ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
             Debug.Log("Load: " + exposedProperty.PropertyValue);
