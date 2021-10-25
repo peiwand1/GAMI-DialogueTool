@@ -12,52 +12,56 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float walkingSpeed = 5;
     [SerializeField]
-    private float rotationSpeed =10;
+    private float rotationSpeed = 10;
     private float movementX;
     private float movementZ;
     private float YRotation = 0;
-    
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-
-    void Update()
-    {
-        if(YRotation > 0)
-        {
-            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-        }
-        else if (YRotation < 0)
-        {
-            transform.Rotate(Vector3.down, rotationSpeed * Time.deltaTime);
-        }
-    }
+    //void Update()
+    //{
+    //    if (YRotation > 0)
+    //    {
+    //        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+    //    }
+    //    else if (YRotation < 0)
+    //    {
+    //        transform.Rotate(Vector3.down, rotationSpeed * Time.deltaTime);
+    //    }
+    //}
 
     void FixedUpdate()
     {
         Vector3 moveDirection = transform.forward * movementZ + transform.right * movementX;
-        rb.MovePosition(transform.position + (moveDirection.normalized*walkingSpeed*Time.deltaTime));
+        rb.MovePosition(transform.position + (moveDirection.normalized * walkingSpeed * Time.deltaTime));
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, YRotation, 0));
         rb.angularVelocity = Vector3.zero;
         //rb.AddForce(moveDirection.normalized*walkingSpeed,ForceMode.Acceleration);
     }
 
 
-    void OnMove(InputValue movementValue) 
+    void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
 
         movementX = movementVector.x;
         movementZ = movementVector.y;
     }
-    void OnRotate(InputValue movementValue) 
+
+    //void OnRotate(InputValue movementValue)
+    //{
+    //    Vector2 movementVector = movementValue.Get<Vector2>();
+
+    //    YRotation = movementVector.x;
+    //}
+
+    void OnLook(InputValue movementValue)
     {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-
-        YRotation = movementVector.x;
-
+        Vector2 lookValue = movementValue.Get<Vector2>();
+        YRotation = lookValue.x * rotationSpeed;
     }
-
 }
-
