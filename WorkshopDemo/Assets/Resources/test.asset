@@ -13,6 +13,40 @@ MonoBehaviour:
   m_Name: test
   m_EditorClassIdentifier: 
   DialogueNodeData:
-  - NodeGUID: 7e354c67-8678-4b71-a7b1-ebc8266c3234
-    DialogueText: How are you?
-    Position: {x: 192, y: 233}
+  - NodeGUID: 86a3ab58-48fe-4881-93c3-8b8177fd1def
+    DialogueText: Why?
+    Position: {x: 699, y: 341}
+  - NodeGUID: 9b6e3dbe-00c7-4fd1-99ff-5063d52fe0fe
+    DialogueText: How are you today?
+    Position: {x: 331, y: 313}
+  - NodeGUID: cdda13ea-278b-4ede-bbdb-46cf948891f2
+    DialogueText: Nice
+    Position: {x: 699, y: 191}
+  - NodeGUID: 1deaed40-b927-4a41-b28a-c865133bc562
+    DialogueText: Bread
+    Position: {x: 699, y: 459}
+  NodeLinks:
+  - BaseNodeGuid: 61176079-33fc-4254-9ff6-e6d286d5bdfd
+    PortName: Next
+    TargetNodeGuid: 9b6e3dbe-00c7-4fd1-99ff-5063d52fe0fe
+  - BaseNodeGuid: test
+    PortName: test
+    TargetNodeGuid: test
+  - BaseNodeGuid: 9b6e3dbe-00c7-4fd1-99ff-5063d52fe0fe
+    PortName: Bad
+    TargetNodeGuid: 86a3ab58-48fe-4881-93c3-8b8177fd1def
+  - BaseNodeGuid: test
+    PortName: test
+    TargetNodeGuid: test
+  - BaseNodeGuid: 9b6e3dbe-00c7-4fd1-99ff-5063d52fe0fe
+    PortName: Good
+    TargetNodeGuid: cdda13ea-278b-4ede-bbdb-46cf948891f2
+  - BaseNodeGuid: test
+    PortName: test
+    TargetNodeGuid: test
+  - BaseNodeGuid: 9b6e3dbe-00c7-4fd1-99ff-5063d52fe0fe
+    PortName: Bread
+    TargetNodeGuid: 1deaed40-b927-4a41-b28a-c865133bc562
+  - BaseNodeGuid: test
+    PortName: test
+    TargetNodeGuid: test

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Tools.Runtime.Properties;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -23,8 +24,40 @@ public class GraphSaveUtility
 
     public void SaveGraph(string fileName)
     {
+        if (!Edges.Any()) return;
         var dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
-        if (!SaveNodes(dialogueContainer)) return;
+        
+
+        var connectedPorts = Edges.Where(x => x.input.node != null).ToArray();
+
+        for (var i = 0; i < connectedPorts.Length; i++)
+        {
+            var outputNode = connectedPorts[i].output.node as DialogueNode;
+            var inputNode = connectedPorts[i].input.node as DialogueNode;
+
+            dialogueContainer.NodeLinks.Add(new NodeLinkData
+            {
+                BaseNodeGuid = outputNode.GUID,
+                PortName = connectedPorts[i].output.portName,
+                TargetNodeGuid = inputNode.GUID
+            });
+            dialogueContainer.NodeLinks.Add(new NodeLinkData
+            {
+                BaseNodeGuid = "test",
+                PortName = "test",
+                TargetNodeGuid = "test"
+            });
+        }
+
+        foreach (var dialogueNode in Nodes.Where(node => !node.Entrypoint))
+        {
+            dialogueContainer.DialogueNodeData.Add(new DialogueNodeData
+            {
+                NodeGUID = dialogueNode.GUID,
+                DialogueText = dialogueNode.dialogueText,
+                Position = dialogueNode.GetPosition().position
+            });
+        }
         SaveExposedProperties(dialogueContainer);
         
         if (!AssetDatabase.IsValidFolder("Assets/Resources"))
@@ -68,7 +101,15 @@ public class GraphSaveUtility
 
     private void SaveExposedProperties(DialogueContainer dialogueContainer)
     {
-        dialogueContainer.ExposedProperties.AddRange(_targetGraphView.ExposedProperties);
+        foreach (var exposedProperty in _targetGraphView.ExposedProperties)
+        {
+            dialogueContainer.ExposedProperties.Add(new ExposedPropertyData
+            { 
+                PropertyName = exposedProperty.PropertyName,
+                PropertyValue = exposedProperty.PropertyValue,
+                PropertyType = exposedProperty.PropertyType
+            });
+        }
     }
 
     public void LoadGraph(string fileName)
@@ -89,8 +130,10 @@ public class GraphSaveUtility
     private void CreateExposedProperties()
     {
         _targetGraphView.ClearBlackboardAndExposedProperties();
-        foreach (var exposedProperty in _containerCache.ExposedProperties)
+        foreach (var exposedPropertyData in _containerCache.ExposedProperties)
         {
+            ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
+            exposedProperty.PropertyValue = exposedPropertyData.PropertyValue;
             _targetGraphView.AddPropertyToBlackboard(exposedProperty);
         }
     }
@@ -139,17 +182,16 @@ public class GraphSaveUtility
             nodePorts.ForEach(x => _targetGraphView.AddChoicePort(tempNode, x.PortName));
         }
     }
-    
+
     private void ClearGraph()
     {
         Nodes.Find(x => x.Entrypoint).GUID = _containerCache.NodeLinks[0].BaseNodeGuid;
+        
         foreach (var perNode in Nodes)
         {
             if (perNode.Entrypoint) continue;
-            Edges.Where(x => x.input.node == perNode).ToList()
-                .ForEach(edge => _targetGraphView.RemoveElement(edge));
-           _targetGraphView.RemoveElement(perNode);
+            Edges.Where(x => x.input.node == perNode).ToList().ForEach(edge => _targetGraphView.RemoveElement(edge));
+            _targetGraphView.RemoveElement(perNode);
         }
     }
-    
 }
