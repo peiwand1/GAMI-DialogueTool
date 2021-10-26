@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
@@ -10,7 +11,9 @@ public class DialogueGraph : EditorWindow
     private DialogueGraphView _graphView;
     private string _fileName = "New Narrative";
     private MiniMap _miniMap;
-    
+    private string path = "Assets/Resources/GraphData/previousGraph.txt";
+
+
     [MenuItem("Graph/Dialogue Graph")]
     public static void OpenDialogueGraphWindow()
     {
@@ -19,6 +22,21 @@ public class DialogueGraph : EditorWindow
     }
 
     private void OnEnable()
+    {
+        string previousGraph = LoadPreviousGraph();
+        if (previousGraph.Equals(""))
+        {
+            MakeNewGraph();
+        }
+        else
+        {
+            _fileName = previousGraph;
+            MakeNewGraph();
+            GraphSaveUtility.GetInstance(_graphView).LoadGraph(previousGraph);
+        }
+    }
+
+    private void MakeNewGraph()
     {
         ConstructGraphView();
         GenerateToolBar();
@@ -62,6 +80,8 @@ public class DialogueGraph : EditorWindow
 
     private void OnDisable()
     {
+        GraphSaveUtility.GetInstance(_graphView).SaveGraph(_fileName);
+        SavePreviousGraph(_fileName);
         rootVisualElement.Clear();
     }
 
@@ -95,8 +115,9 @@ public class DialogueGraph : EditorWindow
 
     private void NewGraph()
     {
-        OnDisable();
-        OnEnable();
+        rootVisualElement.Clear();
+        _fileName = "New Narrative";
+        MakeNewGraph();
     }
 
     private void RequestDataOperation(bool save)
@@ -115,5 +136,28 @@ public class DialogueGraph : EditorWindow
         {
             saveUtility.LoadGraph(_fileName);
         }
+    }
+
+    private void SavePreviousGraph(string previousGraph)
+    {
+        File.Create(path).Close();
+        StreamWriter writer = new StreamWriter(path);
+        writer.WriteLine(previousGraph);
+        writer.Close();
+    }
+    
+    private string LoadPreviousGraph()
+    {
+        if (!File.Exists(path))
+        {
+            FileInfo file = new FileInfo(path);
+            file.Directory.Create();
+            SavePreviousGraph("");
+        }
+        
+        StreamReader reader = new StreamReader(path); 
+        string fileContent = reader.ReadLine();
+        reader.Close();
+        return fileContent;
     }
 }

@@ -152,7 +152,7 @@ public class DialogueGraph : EditorWindow
         {
             FileInfo file = new FileInfo(path);
             file.Directory.Create();
-            File.CreateText(path);
+            SavePreviousGraph("");
         }
         
         StreamReader reader = new StreamReader(path); 

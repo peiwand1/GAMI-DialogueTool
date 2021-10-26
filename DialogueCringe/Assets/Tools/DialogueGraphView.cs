@@ -44,7 +44,6 @@ public class DialogueGraphView : GraphView
         searchWindow.Init(editorWindow, this);
         nodeCreationRequest = context =>
         {
-            Debug.Log(context.screenMousePosition);
             if (context.screenMousePosition.x == 0 && context.screenMousePosition.y == 0)
             {
                 context.screenMousePosition.x = 1000;
