@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6727c9ba1c50774ab6f4ea163ef5eda, type: 3}
-  m_Name: Test
+  m_Name: Snacks
   m_EditorClassIdentifier: 
   DialogueNodeData:
-  - NodeGUID: fc2d044c-2a65-41ac-a9dd-59d06e403d76
+  - NodeGUID: 95f918e1-e237-466b-b8b1-bf96589afa28
     DialogueText: Dialogue Node
-    Position: {x: 305, y: 188}
+    Position: {x: 553, y: 191}
   NodeLinks:
-  - BaseNodeGuid: 8a2d14e3-d2df-4e4e-98c0-71ae2a3d448b
+  - BaseNodeGuid: bf2368c2-16eb-4d98-a4fc-c15dc40c0f9e
     PortName: Next
-    TargetNodeGuid: fc2d044c-2a65-41ac-a9dd-59d06e403d76
+    TargetNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
   ExposedStringProperties: []
-  ExposedBooleanProperties:
-  - PropertyName: New Boolean
-    PropertyValue: 1
-    PropertyType: Boolean
+  ExposedBooleanProperties: []
   ExposedIntegerProperties: []
   ExposedFloatProperties:
   - PropertyName: New Float
     PropertyValue: 0
+    PropertyType: Float
+  - PropertyName: New Float(1)
+    PropertyValue: 4.4
     PropertyType: Float

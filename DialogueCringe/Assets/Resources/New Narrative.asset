@@ -13,41 +13,14 @@ MonoBehaviour:
   m_Name: New Narrative
   m_EditorClassIdentifier: 
   DialogueNodeData:
-  - NodeGUID: e7f67db3-891e-4ea1-9890-d8336c068335
-    DialogueText: Test
-    Position: {x: 605, y: 308}
-  - NodeGUID: 3231e169-51c3-4821-a95b-93ef701f66a4
-    DialogueText: Test2
-    Position: {x: 953, y: 210}
-  - NodeGUID: eff650e7-01d4-4018-8c5a-6e7098e07580
-    DialogueText: Test3
-    Position: {x: 938, y: 372}
-  - NodeGUID: cb9a4ed3-0ac1-4cad-94b3-6b375b9d16fe
-    DialogueText: Test4
-    Position: {x: 938, y: 600}
+  - NodeGUID: 95f918e1-e237-466b-b8b1-bf96589afa28
+    DialogueText: Dialogue Node
+    Position: {x: 553, y: 191}
   NodeLinks:
-  - BaseNodeGuid: bd738b0a-cad1-4918-a002-c7c7d0289da2
+  - BaseNodeGuid: bf2368c2-16eb-4d98-a4fc-c15dc40c0f9e
     PortName: Next
-    TargetNodeGuid: e7f67db3-891e-4ea1-9890-d8336c068335
-  - BaseNodeGuid: e7f67db3-891e-4ea1-9890-d8336c068335
-    PortName: Choice 1
-    TargetNodeGuid: 3231e169-51c3-4821-a95b-93ef701f66a4
-  - BaseNodeGuid: e7f67db3-891e-4ea1-9890-d8336c068335
-    PortName: Choice 2
-    TargetNodeGuid: eff650e7-01d4-4018-8c5a-6e7098e07580
-  - BaseNodeGuid: e7f67db3-891e-4ea1-9890-d8336c068335
-    PortName: Choice 3
-    TargetNodeGuid: cb9a4ed3-0ac1-4cad-94b3-6b375b9d16fe
-  ExposedStringProperties:
-  - PropertyName: String
-    PropertyValue: Kaas
-    PropertyType: String
-  ExposedBooleanProperties:
-  - PropertyName: New Boolean Property
-    PropertyValue: 1
-    PropertyType: Boolean
-  ExposedIntegerProperties:
-  - PropertyName: New Integer Property(1)
-    PropertyValue: 0
-    PropertyType: Integer
+    TargetNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
+  ExposedStringProperties: []
+  ExposedBooleanProperties: []
+  ExposedIntegerProperties: []
   ExposedFloatProperties: []

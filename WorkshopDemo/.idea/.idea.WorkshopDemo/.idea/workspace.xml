@@ -5,10 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f0e5d36-59da-4360-bc5f-ae7fa3ed3b07" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Haaa.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Haaa.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Kaasss.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Kaasss.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/GraphData/previousGraph.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/GraphData/previousGraph.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Test.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Test.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/PropertySearchWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/PropertySearchWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/Runtime/GraphSaveUtility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/Runtime/GraphSaveUtility.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/PropertySearchWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/PropertySearchWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/Runtime/GraphSaveUtility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/Runtime/GraphSaveUtility.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +88,7 @@
       <workItem from="1635174839955" duration="5938000" />
       <workItem from="1635265400600" duration="76000" />
       <workItem from="1635265518700" duration="4034000" />
+      <workItem from="1635279318240" duration="1598000" />
     </task>
     <servers />
   </component>
