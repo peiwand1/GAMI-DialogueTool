@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6727c9ba1c50774ab6f4ea163ef5eda, type: 3}
-  m_Name: New Narrative
+  m_Name: Kaas
   m_EditorClassIdentifier: 
   DialogueNodeData:
   - NodeGUID: f5d84604-a8a3-49b0-a136-05635ba5c8f4
