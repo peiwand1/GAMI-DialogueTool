@@ -116,6 +116,7 @@ public class DialogueGraph : EditorWindow
     private void NewGraph()
     {
         rootVisualElement.Clear();
+        _fileName = "New Narrative";
         MakeNewGraph();
     }
 
