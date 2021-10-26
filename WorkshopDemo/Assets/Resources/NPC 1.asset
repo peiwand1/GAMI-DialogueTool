@@ -46,7 +46,7 @@ MonoBehaviour:
     TargetNodeGuid: 6aa74cf9-32ce-4440-be13-a4adce7c856e
   ExposedStringProperties:
   - PropertyName: PlayerName
-    PropertyValue: Tanguy
+    PropertyValue: Tim
     PropertyType: String
   ExposedBooleanProperties:
   - PropertyName: TestBool

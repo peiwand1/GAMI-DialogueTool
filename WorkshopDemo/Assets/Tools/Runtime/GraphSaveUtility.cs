@@ -23,43 +23,84 @@ public class GraphSaveUtility
         };
     }
 
+    // public void SaveGraph(string fileName)
+    // {
+    //     // if (!Edges.Any()) return;
+    //     var dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
+    //
+    //     SaveNodes(dialogueContainer);
+    //
+    //     // var connectedPorts = Edges.Where(x => x.input.node != null).ToArray();
+    //     //
+    //     // for (var i = 0; i < connectedPorts.Length; i++)
+    //     // {
+    //     //     var outputNode = connectedPorts[i].output.node as DialogueNode;
+    //     //     var inputNode = connectedPorts[i].input.node as DialogueNode;
+    //     //
+    //     //     dialogueContainer.NodeLinks.Add(new NodeLinkData
+    //     //     {
+    //     //         BaseNodeGuid = outputNode.GUID,
+    //     //         PortName = connectedPorts[i].output.portName,
+    //     //         TargetNodeGuid = inputNode.GUID
+    //     //     });
+    //     // }
+    //     //
+    //     // foreach (var dialogueNode in Nodes.Where(node => !node.Entrypoint))
+    //     // {
+    //     //     dialogueContainer.DialogueNodeData.Add(new DialogueNodeData
+    //     //     {
+    //     //         NodeGUID = dialogueNode.GUID,
+    //     //         DialogueText = dialogueNode.dialogueText,
+    //     //         Position = dialogueNode.GetPosition().position
+    //     //     });
+    //     // }
+    //     SaveExposedProperties(dialogueContainer);
+    //     
+    //     if (!AssetDatabase.IsValidFolder("Assets/Resources"))
+    //         AssetDatabase.CreateFolder("Assets", "Resources");
+    //
+    //     AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/{fileName}.asset");
+    //     AssetDatabase.SaveAssets();
+    // }
+    
     public void SaveGraph(string fileName)
     {
-        if (!Edges.Any()) return;
         var dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
+    
+        DialogueContainer existingDialogueContainer = Resources.Load<DialogueContainer>(fileName);
         
-
-        var connectedPorts = Edges.Where(x => x.input.node != null).ToArray();
-
-        for (var i = 0; i < connectedPorts.Length; i++)
+        if (existingDialogueContainer != null)
         {
-            var outputNode = connectedPorts[i].output.node as DialogueNode;
-            var inputNode = connectedPorts[i].input.node as DialogueNode;
-
-            dialogueContainer.NodeLinks.Add(new NodeLinkData
-            {
-                BaseNodeGuid = outputNode.GUID,
-                PortName = connectedPorts[i].output.portName,
-                TargetNodeGuid = inputNode.GUID
-            });
+            ClearDialogueContainer(existingDialogueContainer);
+            
+            SaveNodes(existingDialogueContainer);
+            SaveExposedProperties(existingDialogueContainer);
+            
+            EditorUtility.SetDirty(existingDialogueContainer);
+            AssetDatabase.SaveAssets();
         }
-
-        foreach (var dialogueNode in Nodes.Where(node => !node.Entrypoint))
+        else
         {
-            dialogueContainer.DialogueNodeData.Add(new DialogueNodeData
-            {
-                NodeGUID = dialogueNode.GUID,
-                DialogueText = dialogueNode.dialogueText,
-                Position = dialogueNode.GetPosition().position
-            });
-        }
-        SaveExposedProperties(dialogueContainer);
+            SaveNodes(dialogueContainer);
+            SaveExposedProperties(dialogueContainer);
         
-        if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-            AssetDatabase.CreateFolder("Assets", "Resources");
-
-        AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/{fileName}.asset");
-        AssetDatabase.SaveAssets();
+            if (!AssetDatabase.IsValidFolder("Assets/Resources"))
+                AssetDatabase.CreateFolder("Assets", "Resources");
+    
+            AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/{fileName}.asset");
+            EditorUtility.SetDirty(dialogueContainer);
+            AssetDatabase.SaveAssets(); 
+        }
+    }
+    
+    private void ClearDialogueContainer(DialogueContainer dialogueContainer)
+    {
+        dialogueContainer.NodeLinks.Clear();
+        dialogueContainer.DialogueNodeData.Clear();
+        dialogueContainer.ExposedBooleanProperties.Clear();
+        dialogueContainer.ExposedFloatProperties.Clear();
+        dialogueContainer.ExposedIntegerProperties.Clear();
+        dialogueContainer.ExposedStringProperties.Clear();
     }
 
     private bool SaveNodes(DialogueContainer dialogueContainer)

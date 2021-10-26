@@ -1,6 +1,5 @@
 using System;
 
-
 [Serializable]
 public class NodeLinkData
 {
