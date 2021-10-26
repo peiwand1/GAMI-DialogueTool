@@ -5,22 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f0e5d36-59da-4360-bc5f-ae7fa3ed3b07" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Kaaaas.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/GraphData.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/GraphData/previousGraph.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/GraphData/previousGraph.txt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/GraphData/previousGraph.txt.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Kaas.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Test.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Test3.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Test4.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Test5.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Test6.asset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +76,7 @@
       <workItem from="1635173988100" duration="706000" />
       <workItem from="1635174839955" duration="5938000" />
       <workItem from="1635265400600" duration="76000" />
-      <workItem from="1635265518700" duration="1129000" />
+      <workItem from="1635265518700" duration="1720000" />
     </task>
     <servers />
   </component>

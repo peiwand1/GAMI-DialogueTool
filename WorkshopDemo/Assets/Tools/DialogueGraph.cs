@@ -108,14 +108,14 @@ public class DialogueGraph : EditorWindow
         toolbar.Add(new Button(() => RequestDataOperation(true)) { text = "Save Data" });
         toolbar.Add(new Button(() => RequestDataOperation(false)) { text = "Load Data" });
         toolbar.Add(new Button(() => _graphView.OpenSearchWindow()) { text = "New Node" });
-        toolbar.Add(new Button(() => NewGraph()) { text = "New Graph" });
+        toolbar.Add(new Button(() => NewGraphButton()) { text = "New Graph" });
 
         rootVisualElement.Add(toolbar);
     }
 
-    private void NewGraph()
+    private void NewGraphButton()
     {
-        rootVisualElement.Clear();
+        OnDisable();
         _fileName = "New Narrative";
         MakeNewGraph();
     }
