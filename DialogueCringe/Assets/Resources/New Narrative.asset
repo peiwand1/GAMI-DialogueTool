@@ -47,10 +47,7 @@ MonoBehaviour:
     PropertyValue: 1
     PropertyType: Boolean
   ExposedIntegerProperties:
-  - PropertyName: New Integer Property
+  - PropertyName: New Integer Property(1)
     PropertyValue: 0
     PropertyType: Integer
-  ExposedFloatProperties:
-  - PropertyName: New Float Property
-    PropertyValue: 0
-    PropertyType: Float
+  ExposedFloatProperties: []

@@ -227,20 +227,21 @@ public class DialogueGraphView : GraphView
                 {
                     localPropertyValue = "New String";
                 }
-                
+
                 blackboardField.typeText = "string";
                 propertyValueField = new TextField("Value:")
                 {
                     value = localPropertyValue
                 };
                 property.PropertyValue = localPropertyValue;
-                
+
                 ((TextField)propertyValueField).RegisterValueChangedCallback(evt =>
                 {
-                    var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+                    var changingPropertyIndex =
+                        ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
                     ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
                 });
-                
+
                 break;
             case "Boolean":
                 if (localPropertyValue == null)
@@ -254,19 +255,21 @@ public class DialogueGraphView : GraphView
                     value = localPropertyValue
                 };
                 property.PropertyValue = localPropertyValue;
-                
+
                 ((Toggle)propertyValueField).RegisterValueChangedCallback(evt =>
                 {
-                    var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+                    var changingPropertyIndex =
+                        ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
                     ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
                 });
-                
+
                 break;
             case "Integer":
                 if (localPropertyValue == null)
                 {
                     localPropertyValue = 0;
                 }
+
                 blackboardField.typeText = "integer";
                 propertyValueField = new IntegerField("Value:")
                 {
@@ -274,13 +277,14 @@ public class DialogueGraphView : GraphView
 
                 };
                 property.PropertyValue = localPropertyValue;
-                
+
                 ((IntegerField)propertyValueField).RegisterValueChangedCallback(evt =>
                 {
-                    var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+                    var changingPropertyIndex =
+                        ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
                     ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
                 });
-                
+
                 break;
 
             case "Float":
@@ -288,7 +292,7 @@ public class DialogueGraphView : GraphView
                 {
                     localPropertyValue = 0.0f;
                 }
-                
+
                 blackboardField.typeText = "float";
                 propertyValueField = new FloatField("Value:")
                 {
@@ -296,19 +300,31 @@ public class DialogueGraphView : GraphView
 
                 };
                 property.PropertyValue = localPropertyValue;
-                
+
                 ((FloatField)propertyValueField).RegisterValueChangedCallback(evt =>
-                {
+                {            
                     var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
                     ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
                 });
-                
+
                 break;
         }
+
         container.Add(blackboardField);
         var blackboardValueRow = new BlackboardRow(blackboardField, propertyValueField);
         container.Add(blackboardValueRow);
-        
+
+        container.AddManipulator(new ContextualMenuManipulator((evt) =>
+        {
+            var propertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+            evt.menu.AppendAction("Delete", (a) => RemovePropertyFromBlackboard(container, propertyIndex), DropdownMenuAction.AlwaysEnabled);
+        }));
         Blackboard.Add(container);
+    }
+
+    private void RemovePropertyFromBlackboard(VisualElement property, int placeInList)
+    {
+        Blackboard.Remove(property);
+        ExposedProperties.RemoveAt(placeInList);
     }
 }
