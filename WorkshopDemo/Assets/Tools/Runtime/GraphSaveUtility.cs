@@ -75,8 +75,11 @@ public class GraphSaveUtility
             
             SaveNodes(existingDialogueContainer);
             SaveExposedProperties(existingDialogueContainer);
-            
-            EditorUtility.SetDirty(existingDialogueContainer);
+
+            if (!EditorUtility.IsDirty(existingDialogueContainer))
+            {
+                EditorUtility.SetDirty(existingDialogueContainer);
+            }
             AssetDatabase.SaveAssets();
         }
         else
