@@ -20,13 +20,13 @@ MonoBehaviour:
   - BaseNodeGuid: bf2368c2-16eb-4d98-a4fc-c15dc40c0f9e
     PortName: Next
     TargetNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
-  ExposedStringProperties: []
+  ExposedStringProperties:
+  - PropertyName: New String
+    PropertyValue: New String
+    PropertyType: String
   ExposedBooleanProperties: []
   ExposedIntegerProperties: []
   ExposedFloatProperties:
-  - PropertyName: New Float
+  - PropertyName: tEST
     PropertyValue: 0
-    PropertyType: Float
-  - PropertyName: New Float(1)
-    PropertyValue: 4.4
     PropertyType: Float

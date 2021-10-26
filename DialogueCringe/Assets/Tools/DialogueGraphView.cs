@@ -13,15 +13,19 @@ using Label = UnityEngine.UIElements.Label;
 public class DialogueGraphView : GraphView
 {
     public readonly Vector2 defaultNodeSize = new Vector2(150, 200);
-
     public Blackboard Blackboard;
     public List<ExposedProperty> ExposedProperties = new List<ExposedProperty>();
     private NodeSearchWindow searchWindow;
     private PropertySearchWindow propertySearchWindow;
     public EditorWindow EditorWindow;
+    public Texture2D _indentationIcon;
 
     public DialogueGraphView(EditorWindow editorWindow)
     {
+        _indentationIcon = new Texture2D(1, 1);
+        _indentationIcon.SetPixel(0,0, new Color(0,0,0,0));
+        _indentationIcon.Apply();
+        
         EditorWindow = editorWindow;
         styleSheets.Add(Resources.Load<StyleSheet>("DialogueGraph"));
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
@@ -61,7 +65,7 @@ public class DialogueGraphView : GraphView
     public void AddPropertySearchWindow(EditorWindow editorWindow)
     {
         propertySearchWindow = ScriptableObject.CreateInstance<PropertySearchWindow>();
-        propertySearchWindow.Init(editorWindow, this);
+        propertySearchWindow.Init(this);
         Blackboard.addItemRequested = context =>
             SearchWindow.Open(new SearchWindowContext(new Vector2(50,50)), propertySearchWindow);
     }

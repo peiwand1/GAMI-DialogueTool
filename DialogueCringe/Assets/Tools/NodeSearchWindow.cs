@@ -14,9 +14,7 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
     {
         _editorWindow = editorWindow;
         _graphView = graphView;
-        _indentationIcon = new Texture2D(1, 1);
-        _indentationIcon.SetPixel(0,0, new Color(0,0,0,0));
-        _indentationIcon.Apply();
+        _indentationIcon = _graphView._indentationIcon;
     }
     
     public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
@@ -24,10 +22,9 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
         var tree = new List<SearchTreeEntry>()
         {
             new SearchTreeGroupEntry(new GUIContent("Create Elements"), 0),
-            new SearchTreeGroupEntry(new GUIContent("Dialogue Node"), 1),
-            new SearchTreeEntry(new GUIContent("Dialogue Node", _indentationIcon))
+            new SearchTreeEntry(new GUIContent("Dialogue Node", _indentationIcon))            
             {
-                userData = new DialogueNode(), level = 2
+                userData = new DialogueNode(), level = 1
             }
         };
         return tree;

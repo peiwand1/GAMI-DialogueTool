@@ -7,17 +7,13 @@ using UnityEngine;
 public class PropertySearchWindow : ScriptableObject, ISearchWindowProvider
 {
     private DialogueGraphView _graphView;
-    private EditorWindow _editorWindow;
     private Texture2D _indentationIcon;
     private Blackboard _blackboard;
 
-    public void Init(EditorWindow editorWindow, DialogueGraphView graphView)
+    public void Init(DialogueGraphView graphView)
     {
-        _editorWindow = editorWindow;
         _graphView = graphView;
-        _indentationIcon = new Texture2D(1, 1);
-        _indentationIcon.SetPixel(0,0, new Color(0,0,0,0));
-        _indentationIcon.Apply();
+        _indentationIcon = _graphView._indentationIcon;
     }
     
     public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
