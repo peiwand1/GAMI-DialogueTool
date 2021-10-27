@@ -20,12 +20,6 @@ public class DialogueParser : MonoBehaviour
         buttonContainer = dialogueBox.transform.Find("ButtonHandler").GetComponent<Transform>();
     }
 
-    private void Update()
-    {
-        //Debug.Log(gameObject.name +  " " + dialogue.ExposedStringProperties.First().PropertyName);
-        //Debug.Log(gameObject.name +  " " + dialogue.ExposedStringProperties.First().PropertyValue);
-    }
-
     public void EnableDialogue() {
         dialogueBox.gameObject.SetActive(true);
     }
@@ -43,9 +37,7 @@ public class DialogueParser : MonoBehaviour
     {
         RemoveButtons();
         var text = dialogue.DialogueNodeData.Find(x => x.NodeGUID == narrativeDataGUID).DialogueText;
-        Debug.Log(text);
         dialogueText.text = ProcessProperties(text);
-        //dialogueText.text = text;
         AddChoiceButtons(narrativeDataGUID);
     }
 
@@ -66,9 +58,15 @@ public class DialogueParser : MonoBehaviour
             //button.GetComponentInChildren<TextMeshProUGUI>().text = (choice.PortName);
 
             button.onClick.AddListener(() => HandleChoice(choice));
+
+            // if bool is false, disable button
+            var property = dialogue.ExposedBooleanProperties.Find(x => x.PropertyName == choice.ConditionBoolean);
+            if (property != null && !property.PropertyValue)
+            {
+                button.interactable = false;
+            }
         }
     }
-    
     
     private void HandleChoice(NodeLinkData choice) {
         choiceHandler.HandleChoice(choice);
