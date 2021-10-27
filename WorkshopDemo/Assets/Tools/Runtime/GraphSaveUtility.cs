@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Tools.Runtime.Properties;
 using UnityEditor;
@@ -14,7 +13,6 @@ public class GraphSaveUtility
     private DialogueContainer _containerCache;
     private List<Edge> Edges => _targetGraphView.edges.ToList();
     private List<DialogueNode> Nodes => _targetGraphView.nodes.ToList().Cast<DialogueNode>().ToList();
-    private string path = "Assets/Resources/GraphData/previousGraph.txt";
 
     public static GraphSaveUtility GetInstance(DialogueGraphView targetGraphView)
     {
@@ -26,12 +24,12 @@ public class GraphSaveUtility
 
     public void SaveGraph(string fileName)
     {
-        if(Edges.Find(x => x.output.node.title == "START").Equals(null))
+        if (Edges.Count.Equals(0) || Edges.Find(x => x.output.node.title == "START").Equals(null) || Edges.Equals(null))
         {
             EditorUtility.DisplayDialog("Error", "Start Node must be connected to another node before saving!", "OK");
             return;
         }
-        
+
         var dialogueContainer = Resources.Load<DialogueContainer>(fileName);
         
         if (dialogueContainer != null)
@@ -245,28 +243,5 @@ public class GraphSaveUtility
             Edges.Where(x => x.input.node == perNode).ToList().ForEach(edge => _targetGraphView.RemoveElement(edge));
             _targetGraphView.RemoveElement(perNode);
         }
-    }
-    
-    public void SavePreviousGraph(string previousGraph)
-    {
-        File.Create(path).Close();
-        StreamWriter writer = new StreamWriter(path);
-        writer.WriteLine(previousGraph);
-        writer.Close();
-    }
-    
-    public string LoadPreviousGraph()
-    {
-        if (!File.Exists(path))
-        {
-            FileInfo file = new FileInfo(path);
-            file.Directory.Create();
-            SavePreviousGraph("");
-        }
-        
-        StreamReader reader = new StreamReader(path); 
-        string fileContent = reader.ReadLine();
-        reader.Close();
-        return fileContent;
     }
 }

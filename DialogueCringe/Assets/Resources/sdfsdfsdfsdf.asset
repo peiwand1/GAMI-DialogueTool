@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6727c9ba1c50774ab6f4ea163ef5eda, type: 3}
+  m_Name: sdfsdfsdfsdf
+  m_EditorClassIdentifier: 
+  DialogueNodeData:
+  - NodeGUID: 893497fe-a8a4-4f37-9dd5-6c79a75d6cbc
+    DialogueText: Dialogue Node
+    Position: {x: 433, y: 267}
+  NodeLinks:
+  - BaseNodeGuid: 5a1bd0f9-0bf3-4dbd-8f95-bc2645609b55
+    PortName: Next
+    ConditionBoolean: 
+    TargetNodeGuid: 893497fe-a8a4-4f37-9dd5-6c79a75d6cbc
+  ExposedStringProperties: []
+  ExposedBooleanProperties:
+  - PropertyName: New Boolean
+    PropertyValue: 0
+    PropertyType: Boolean
+  ExposedIntegerProperties:
+  - PropertyName: New Integer
+    PropertyValue: 0
+    PropertyType: Integer
+  ExposedFloatProperties: []

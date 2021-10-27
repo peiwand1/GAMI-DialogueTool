@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6727c9ba1c50774ab6f4ea163ef5eda, type: 3}
+  m_Name: sdfsdfsdfs
+  m_EditorClassIdentifier: 
+  DialogueNodeData:
+  - NodeGUID: 1de6dc08-4c83-435e-a8d0-dbf9a61b2091
+    DialogueText: Dialogue Node
+    Position: {x: 697, y: 300}
+  - NodeGUID: 1c6229e5-8e68-496a-aa84-4e96c4ac3f1a
+    DialogueText: Dialogue Node
+    Position: {x: 364, y: 276}
+  NodeLinks:
+  - BaseNodeGuid: daeeff40-d927-453c-addf-cba39011cd44
+    PortName: Next
+    ConditionBoolean: 
+    TargetNodeGuid: 1c6229e5-8e68-496a-aa84-4e96c4ac3f1a
+  - BaseNodeGuid: 1c6229e5-8e68-496a-aa84-4e96c4ac3f1a
+    PortName: Choice 1
+    ConditionBoolean: No condition
+    TargetNodeGuid: 1de6dc08-4c83-435e-a8d0-dbf9a61b2091
+  ExposedStringProperties: []
+  ExposedBooleanProperties:
+  - PropertyName: test
+    PropertyValue: 1
+    PropertyType: Boolean
+  - PropertyName: test test
+    PropertyValue: 1
+    PropertyType: Boolean
+  ExposedIntegerProperties: []
+  ExposedFloatProperties: []
