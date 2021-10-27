@@ -88,6 +88,7 @@ public class GraphSaveUtility
             {
                 BaseNodeGuid = outputNode.GUID,
                 PortName = connectedPorts[i].output.portName,
+                ConditionBoolean = (string)connectedPorts[i].output.userData,
                 TargetNodeGuid = inputNode.GUID
             });
         }
@@ -230,7 +231,7 @@ public class GraphSaveUtility
             _targetGraphView.AddElement(tempNode);
 
             var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.NodeGUID).ToList();
-            nodePorts.ForEach(x => _targetGraphView.AddChoicePort(tempNode, x.PortName));
+            nodePorts.ForEach(x => _targetGraphView.AddChoicePort(tempNode, x.PortName, x.ConditionBoolean));
         }
     }
 

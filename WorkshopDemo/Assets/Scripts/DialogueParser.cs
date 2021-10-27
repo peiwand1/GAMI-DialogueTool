@@ -58,6 +58,12 @@ public class DialogueParser : MonoBehaviour
             //button.GetComponentInChildren<TextMeshProUGUI>().text = (choice.PortName);
 
             button.onClick.AddListener(() => HandleChoice(choice));
+
+            // if bool is false, disable button
+            if (!dialogue.ExposedBooleanProperties.Find(x => x.PropertyName == choice.ConditionBoolean).PropertyValue)
+            {
+                button.interactable = false;
+            }
         }
     }
     

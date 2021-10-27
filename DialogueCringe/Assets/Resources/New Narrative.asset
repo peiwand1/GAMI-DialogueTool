@@ -13,27 +13,24 @@ MonoBehaviour:
   m_Name: New Narrative
   m_EditorClassIdentifier: 
   DialogueNodeData:
-  - NodeGUID: 1de6dc08-4c83-435e-a8d0-dbf9a61b2091
+  - NodeGUID: 95f918e1-e237-466b-b8b1-bf96589afa28
     DialogueText: Dialogue Node
-    Position: {x: 697, y: 300}
-  - NodeGUID: 1c6229e5-8e68-496a-aa84-4e96c4ac3f1a
+    Position: {x: 432, y: 379}
+  - NodeGUID: 216c5499-39c8-4f94-9941-4ada22b93877
     DialogueText: Dialogue Node
-    Position: {x: 364, y: 276}
+    Position: {x: 733, y: 281}
   NodeLinks:
-  - BaseNodeGuid: daeeff40-d927-453c-addf-cba39011cd44
+  - BaseNodeGuid: bf2368c2-16eb-4d98-a4fc-c15dc40c0f9e
     PortName: Next
     ConditionBoolean: 
-    TargetNodeGuid: 1c6229e5-8e68-496a-aa84-4e96c4ac3f1a
-  - BaseNodeGuid: 1c6229e5-8e68-496a-aa84-4e96c4ac3f1a
+    TargetNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
+  - BaseNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
     PortName: Choice 1
     ConditionBoolean: No condition
-    TargetNodeGuid: 1de6dc08-4c83-435e-a8d0-dbf9a61b2091
+    TargetNodeGuid: 216c5499-39c8-4f94-9941-4ada22b93877
   ExposedStringProperties: []
   ExposedBooleanProperties:
-  - PropertyName: test
-    PropertyValue: 1
-    PropertyType: Boolean
-  - PropertyName: test test
+  - PropertyName: New Boolean
     PropertyValue: 1
     PropertyType: Boolean
   ExposedIntegerProperties: []

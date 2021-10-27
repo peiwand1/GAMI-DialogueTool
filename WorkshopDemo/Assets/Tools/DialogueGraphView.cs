@@ -10,6 +10,7 @@ using UnityEditor.UIElements;
 using Button = UnityEngine.UIElements.Button;
 using Label = UnityEngine.UIElements.Label;
 
+
 public class DialogueGraphView : GraphView
 {
     public readonly Vector2 defaultNodeSize = new Vector2(150, 200);
@@ -150,7 +151,7 @@ public class DialogueGraphView : GraphView
         return dialogueNode;
     }
 
-    public void AddChoicePort(DialogueNode dialogueNode, string overriddenPortName = "")
+    public void AddChoicePort(DialogueNode dialogueNode, string overriddenPortName = "", string overrideConditionBoolean = "No condition")
     {
         var generatedPort = GeneratePort(dialogueNode, Direction.Output);
 
@@ -166,18 +167,34 @@ public class DialogueGraphView : GraphView
             name = string.Empty,
             value = choicePortName
         };
+        var variables = ExposedProperties.Where(x => x.PropertyType == "Boolean").ToList();
+        var variableDropdown = new DropdownField();
+        variableDropdown.choices = variables.Select(x => x.PropertyName).ToList();
+        variableDropdown.choices.Add("No condition");
+        if (variables.Select(x => x.PropertyName).Contains(overrideConditionBoolean))
+        {
+            variableDropdown.value = overrideConditionBoolean;
+        }
+        else
+        {
+            variableDropdown.value = "No condition";
+        }
+        variableDropdown.style.minWidth = new StyleLength(100);
+        variableDropdown.style.maxWidth = new StyleLength(100);
+        generatedPort.contentContainer.Add(variableDropdown);
         textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
         generatedPort.contentContainer.Add( new Label(" "));
         generatedPort.contentContainer.Add(textField);
+
         var deleteButton = new Button(() => RemovePort(dialogueNode, generatedPort))
         {
             text = "X"
         };
         generatedPort.contentContainer.Add(deleteButton);
-
+        variableDropdown.RegisterValueChangedCallback(evt => generatedPort.userData = evt.newValue);
 
         generatedPort.portName = choicePortName;
-
+        generatedPort.userData = variableDropdown.value;
         dialogueNode.outputContainer.Add(generatedPort);
         dialogueNode.RefreshExpandedState();
         dialogueNode.RefreshPorts();
@@ -250,7 +267,7 @@ public class DialogueGraphView : GraphView
             case "Boolean":
                 if (localPropertyValue == null)
                 {
-                    localPropertyValue = true;
+                    localPropertyValue = false;
                 }
 
                 blackboardField.typeText = "boolean";
