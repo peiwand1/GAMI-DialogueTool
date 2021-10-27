@@ -260,7 +260,7 @@ public class DialogueGraphView : GraphView
             case "Boolean":
                 if (localPropertyValue == null)
                 {
-                    localPropertyValue = true;
+                    localPropertyValue = false;
                 }
 
                 blackboardField.typeText = "boolean";
