@@ -151,7 +151,7 @@ public class DialogueGraphView : GraphView
         return dialogueNode;
     }
 
-    public void AddChoicePort(DialogueNode dialogueNode, string overriddenPortName = "")
+    public void AddChoicePort(DialogueNode dialogueNode, string overriddenPortName = "", string overrideConditionBoolean = "No condition")
     {
         var generatedPort = GeneratePort(dialogueNode, Direction.Output);
 
@@ -171,7 +171,14 @@ public class DialogueGraphView : GraphView
         var variableDropdown = new DropdownField();
         variableDropdown.choices = variables.Select(x => x.PropertyName).ToList();
         variableDropdown.choices.Add("No condition");
-        variableDropdown.value = "No condition";
+        if (variables.Select(x => x.PropertyName).Contains(overrideConditionBoolean))
+        {
+            variableDropdown.value = overrideConditionBoolean;
+        }
+        else
+        {
+            variableDropdown.value = "No condition";
+        }
         variableDropdown.style.minWidth = new StyleLength(100);
         variableDropdown.style.maxWidth = new StyleLength(100);
         generatedPort.contentContainer.Add(variableDropdown);
@@ -184,10 +191,10 @@ public class DialogueGraphView : GraphView
             text = "X"
         };
         generatedPort.contentContainer.Add(deleteButton);
-
+        variableDropdown.RegisterValueChangedCallback(evt => generatedPort.userData = evt.newValue);
 
         generatedPort.portName = choicePortName;
-
+        generatedPort.userData = variableDropdown.value;
         dialogueNode.outputContainer.Add(generatedPort);
         dialogueNode.RefreshExpandedState();
         dialogueNode.RefreshPorts();

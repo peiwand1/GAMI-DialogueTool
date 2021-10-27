@@ -13,34 +13,27 @@ MonoBehaviour:
   m_Name: New Narrative
   m_EditorClassIdentifier: 
   DialogueNodeData:
-  - NodeGUID: 216c5499-39c8-4f94-9941-4ada22b93877
+  - NodeGUID: 1de6dc08-4c83-435e-a8d0-dbf9a61b2091
     DialogueText: Dialogue Node
-    Position: {x: 694, y: 180}
-  - NodeGUID: 87abfabb-59b4-4551-a4dc-f15af3f5a735
+    Position: {x: 697, y: 300}
+  - NodeGUID: 1c6229e5-8e68-496a-aa84-4e96c4ac3f1a
     DialogueText: Dialogue Node
-    Position: {x: 694, y: 315}
-  - NodeGUID: 95f918e1-e237-466b-b8b1-bf96589afa28
-    DialogueText: Dialogue Node
-    Position: {x: 309, y: 238}
+    Position: {x: 364, y: 276}
   NodeLinks:
-  - BaseNodeGuid: bf2368c2-16eb-4d98-a4fc-c15dc40c0f9e
+  - BaseNodeGuid: daeeff40-d927-453c-addf-cba39011cd44
     PortName: Next
-    TargetNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
-  - BaseNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
+    ConditionBoolean: 
+    TargetNodeGuid: 1c6229e5-8e68-496a-aa84-4e96c4ac3f1a
+  - BaseNodeGuid: 1c6229e5-8e68-496a-aa84-4e96c4ac3f1a
     PortName: Choice 1
-    TargetNodeGuid: 216c5499-39c8-4f94-9941-4ada22b93877
-  - BaseNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
-    PortName: Choice 2
-    TargetNodeGuid: 87abfabb-59b4-4551-a4dc-f15af3f5a735
+    ConditionBoolean: No condition
+    TargetNodeGuid: 1de6dc08-4c83-435e-a8d0-dbf9a61b2091
   ExposedStringProperties: []
   ExposedBooleanProperties:
-  - PropertyName: Test
+  - PropertyName: test
     PropertyValue: 1
     PropertyType: Boolean
-  - PropertyName: idkwhatimdoing
-    PropertyValue: 1
-    PropertyType: Boolean
-  - PropertyName: asjhdkashdjkashdjkashdjkashdjkhaskd
+  - PropertyName: test test
     PropertyValue: 1
     PropertyType: Boolean
   ExposedIntegerProperties: []
