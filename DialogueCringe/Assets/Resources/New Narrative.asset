@@ -15,10 +15,10 @@ MonoBehaviour:
   DialogueNodeData:
   - NodeGUID: 216c5499-39c8-4f94-9941-4ada22b93877
     DialogueText: Dialogue Node
-    Position: {x: 0, y: 0}
+    Position: {x: 899, y: 294}
   - NodeGUID: 95f918e1-e237-466b-b8b1-bf96589afa28
     DialogueText: Dialogue Node
-    Position: {x: 471, y: 357}
+    Position: {x: 502, y: 200}
   NodeLinks:
   - BaseNodeGuid: bf2368c2-16eb-4d98-a4fc-c15dc40c0f9e
     PortName: Next
