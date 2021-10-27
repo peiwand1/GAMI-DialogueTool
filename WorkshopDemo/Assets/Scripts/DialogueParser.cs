@@ -60,7 +60,8 @@ public class DialogueParser : MonoBehaviour
             button.onClick.AddListener(() => HandleChoice(choice));
 
             // if bool is false, disable button
-            if (!dialogue.ExposedBooleanProperties.Find(x => x.PropertyName == choice.ConditionBoolean).PropertyValue)
+            var property = dialogue.ExposedBooleanProperties.Find(x => x.PropertyName == choice.ConditionBoolean);
+            if (property != null && !property.PropertyValue)
             {
                 button.interactable = false;
             }

@@ -13,21 +13,18 @@ MonoBehaviour:
   m_Name: NPC 1
   m_EditorClassIdentifier: 
   DialogueNodeData:
-  - NodeGUID: 26f342ad-7537-4503-8e1e-9f6daf98c73e
-    DialogueText: Hello, {PlayerName}
-    Position: {x: 259, y: 179}
   - NodeGUID: 315d4bef-8534-458e-82e8-dbf8ca16eb50
     DialogueText: Right Door
-    Position: {x: 1132, y: 216}
+    Position: {x: 1175, y: 353}
   - NodeGUID: a2de3242-5b04-42a0-bd34-1b396df3f460
     DialogueText: Left Door
-    Position: {x: 1132, y: 106}
-  - NodeGUID: 6aa74cf9-32ce-4440-be13-a4adce7c856e
-    DialogueText: You stupid
-    Position: {x: 1132, y: 325}
+    Position: {x: 1175, y: 243}
+  - NodeGUID: 26f342ad-7537-4503-8e1e-9f6daf98c73e
+    DialogueText: Hello, {PlayerName}
+    Position: {x: 270, y: 305}
   - NodeGUID: 10344947-d37d-40db-be93-ba19980af4b3
     DialogueText: You have two choices. Which door do you want to open?
-    Position: {x: 551, y: 168}
+    Position: {x: 594, y: 305}
   NodeLinks:
   - BaseNodeGuid: bc1f32aa-27f4-496d-9a78-9a6211dc513e
     PortName: Next
@@ -39,23 +36,19 @@ MonoBehaviour:
     TargetNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
   - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
     PortName: Left Door
-    ConditionBoolean: TestBool
+    ConditionBoolean: HasKey
     TargetNodeGuid: a2de3242-5b04-42a0-bd34-1b396df3f460
   - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
     PortName: Right Door
-    ConditionBoolean: No condition
+    ConditionBoolean: HasKey
     TargetNodeGuid: 315d4bef-8534-458e-82e8-dbf8ca16eb50
-  - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
-    PortName: Idk
-    ConditionBoolean: No condition
-    TargetNodeGuid: 6aa74cf9-32ce-4440-be13-a4adce7c856e
   ExposedStringProperties:
   - PropertyName: PlayerName
     PropertyValue: Tim
     PropertyType: String
   ExposedBooleanProperties:
-  - PropertyName: TestBool
-    PropertyValue: 0
+  - PropertyName: HasKey
+    PropertyValue: 1
     PropertyType: Boolean
   ExposedIntegerProperties: []
   ExposedFloatProperties: []

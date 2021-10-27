@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCHandler : MonoBehaviour
 {
-    [SerializeField] private DialogueContainer dialogue;
+    public DialogueContainer dialogue;
     private DialogueParser parser;
     private bool isSpeaking;
 
