@@ -48,7 +48,7 @@ MonoBehaviour:
     PropertyType: String
   ExposedBooleanProperties:
   - PropertyName: HasKey
-    PropertyValue: 1
+    PropertyValue: 0
     PropertyType: Boolean
   ExposedIntegerProperties: []
   ExposedFloatProperties: []
