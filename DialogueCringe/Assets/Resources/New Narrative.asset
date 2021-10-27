@@ -12,9 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6727c9ba1c50774ab6f4ea163ef5eda, type: 3}
   m_Name: New Narrative
   m_EditorClassIdentifier: 
-  DialogueNodeData: []
-  NodeLinks: []
+  DialogueNodeData:
+  - NodeGUID: 95f918e1-e237-466b-b8b1-bf96589afa28
+    DialogueText: Dialogue Node
+    Position: {x: 432, y: 379}
+  - NodeGUID: 216c5499-39c8-4f94-9941-4ada22b93877
+    DialogueText: Dialogue Node
+    Position: {x: 733, y: 281}
+  NodeLinks:
+  - BaseNodeGuid: bf2368c2-16eb-4d98-a4fc-c15dc40c0f9e
+    PortName: Next
+    ConditionBoolean: 
+    TargetNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
+  - BaseNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
+    PortName: Choice 1
+    ConditionBoolean: No condition
+    TargetNodeGuid: 216c5499-39c8-4f94-9941-4ada22b93877
   ExposedStringProperties: []
-  ExposedBooleanProperties: []
+  ExposedBooleanProperties:
+  - PropertyName: New Boolean
+    PropertyValue: 1
+    PropertyType: Boolean
   ExposedIntegerProperties: []
   ExposedFloatProperties: []
