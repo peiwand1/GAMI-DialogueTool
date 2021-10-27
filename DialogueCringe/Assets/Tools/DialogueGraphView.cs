@@ -167,20 +167,9 @@ public class DialogueGraphView : GraphView
             name = string.Empty,
             value = choicePortName
         };
-        var variables = ExposedProperties.Where(x => x.PropertyType == "Boolean").ToList();
-        var variableDropdown = new DropdownField();
-        variableDropdown.choices = variables.Select(x => x.PropertyName).ToList();
-        variableDropdown.choices.Add("No condition");
-        if (variables.Select(x => x.PropertyName).Contains(overrideConditionBoolean))
-        {
-            variableDropdown.value = overrideConditionBoolean;
-        }
-        else
-        {
-            variableDropdown.value = "No condition";
-        }
-        variableDropdown.style.minWidth = new StyleLength(100);
-        variableDropdown.style.maxWidth = new StyleLength(100);
+
+        var variableDropdown = GenerateDropdown(overrideConditionBoolean);
+        
         generatedPort.contentContainer.Add(variableDropdown);
         textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
         generatedPort.contentContainer.Add( new Label(" "));
@@ -199,6 +188,25 @@ public class DialogueGraphView : GraphView
         dialogueNode.RefreshExpandedState();
         dialogueNode.RefreshPorts();
 
+    }
+
+    private DropdownField GenerateDropdown(string overrideConditionBoolean)
+    {
+        var variables = ExposedProperties.Where(x => x.PropertyType == "Boolean").ToList();
+        var variableDropdown = new DropdownField();
+        variableDropdown.choices = variables.Select(x => x.PropertyName).ToList();
+        variableDropdown.choices.Add("No condition");
+        if (variables.Select(x => x.PropertyName).Contains(overrideConditionBoolean))
+        {
+            variableDropdown.value = overrideConditionBoolean;
+        }
+        else
+        {
+            variableDropdown.value = "No condition";
+        }
+        variableDropdown.style.minWidth = new StyleLength(100);
+        variableDropdown.style.maxWidth = new StyleLength(100);
+        return variableDropdown;
     }
 
     private void RemovePort(DialogueNode dialogueNode, Port generatedPort)

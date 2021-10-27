@@ -154,14 +154,13 @@ public class GraphSaveUtility
         }
 
         ClearGraph();
+        LoadExposedProperties();
         CreateNodes();
         ConnectNodes();
-        LoadExposedProperties();
     }
 
     private void LoadExposedProperties()
     {
-        _targetGraphView.ClearBlackboardAndExposedProperties();
         foreach (var exposedPropertyData in _containerCache.ExposedStringProperties)
         {
             ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
@@ -243,5 +242,7 @@ public class GraphSaveUtility
             Edges.Where(x => x.input.node == perNode).ToList().ForEach(edge => _targetGraphView.RemoveElement(edge));
             _targetGraphView.RemoveElement(perNode);
         }
+        
+        _targetGraphView.ClearBlackboardAndExposedProperties();
     }
 }
