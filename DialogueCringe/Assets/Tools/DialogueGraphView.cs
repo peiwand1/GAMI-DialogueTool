@@ -10,9 +10,10 @@ using UnityEditor.UIElements;
 using Button = UnityEngine.UIElements.Button;
 using Label = UnityEngine.UIElements.Label;
 
+
 public class DialogueGraphView : GraphView
 {
-    public readonly Vector2 defaultNodeSize = new Vector2(150, 200);
+    public readonly Vector2 defaultNodeSize = new Vector2(150, 400);
     public Blackboard Blackboard;
     public List<ExposedProperty> ExposedProperties = new List<ExposedProperty>();
     private NodeSearchWindow searchWindow;
@@ -166,9 +167,16 @@ public class DialogueGraphView : GraphView
             name = string.Empty,
             value = choicePortName
         };
+        var variables = ExposedProperties.Where(x => x.PropertyType == "Boolean").ToList();
+        var variableDropdown = new DropdownField();
+        variableDropdown.choices = variables.Select(x => x.PropertyName).ToList();
+        variableDropdown.choices.Add("No condition");
+        variableDropdown.value = "No condition";
+        generatedPort.contentContainer.Add(variableDropdown);
         textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
         generatedPort.contentContainer.Add( new Label(" "));
         generatedPort.contentContainer.Add(textField);
+
         var deleteButton = new Button(() => RemovePort(dialogueNode, generatedPort))
         {
             text = "X"
