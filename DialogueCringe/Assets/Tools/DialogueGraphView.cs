@@ -194,8 +194,8 @@ public class DialogueGraphView : GraphView
     {
         var variables = ExposedProperties.Where(x => x.PropertyType == "Boolean").ToList();
         var variableDropdown = new DropdownField();
-        variableDropdown.choices = variables.Select(x => x.PropertyName).ToList();
         variableDropdown.choices.Add("No condition");
+        variableDropdown.choices.AddRange(variables.Select(x => x.PropertyName).ToList());
         if (variables.Select(x => x.PropertyName).Contains(overrideConditionBoolean))
         {
             variableDropdown.value = overrideConditionBoolean;

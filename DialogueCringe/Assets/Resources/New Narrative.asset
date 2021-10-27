@@ -29,11 +29,11 @@ MonoBehaviour:
     TargetNodeGuid: 54d74565-4685-4741-ab97-2f77184baef9
   - BaseNodeGuid: 54d74565-4685-4741-ab97-2f77184baef9
     PortName: Choice 1
-    ConditionBoolean: No condition
+    ConditionBoolean: New Boolean
     TargetNodeGuid: 8bad5bf7-6317-4091-9f0c-3d007139228c
   - BaseNodeGuid: 54d74565-4685-4741-ab97-2f77184baef9
     PortName: Choice 2
-    ConditionBoolean: No condition
+    ConditionBoolean: TestBool2
     TargetNodeGuid: 13e47fff-3273-4310-8083-5b2dac245c9c
   ExposedStringProperties:
   - PropertyName: New String
@@ -44,6 +44,9 @@ MonoBehaviour:
     PropertyValue: 0
     PropertyType: Boolean
   - PropertyName: New Boolean
+    PropertyValue: 0
+    PropertyType: Boolean
+  - PropertyName: New Boolean(1)
     PropertyValue: 0
     PropertyType: Boolean
   ExposedIntegerProperties: []
