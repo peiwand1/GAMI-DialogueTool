@@ -6,29 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8f0e5d36-59da-4360-bc5f-ae7fa3ed3b07" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/GraphData/previousGraph.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/GraphData/previousGraph.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Haaa.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Haaa.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Kaas.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Kaas.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Kaasss.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Kaasss.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Snacks.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Snacks.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Test.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/Test.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/dfgdfgd.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/dfgdfgd.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/dfgdfgdfg.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/dfgdfgdfg.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/dfgdfgdfgdfgdfg.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/dfgdfgdfgdfgdfg.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/sdfsdfsdfs.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/sdfsdfsdfs.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/sdfsdfsdfsdf.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/sdfsdfsdfsdf.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +79,7 @@
       <workItem from="1635265518700" duration="4034000" />
       <workItem from="1635279318240" duration="3001000" />
       <workItem from="1635350313905" duration="771000" />
+      <workItem from="1635364608684" duration="28000" />
     </task>
     <servers />
   </component>

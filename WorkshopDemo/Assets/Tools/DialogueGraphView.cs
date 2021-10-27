@@ -51,8 +51,8 @@ public class DialogueGraphView : GraphView
         {
             if (context.screenMousePosition.x == 0 && context.screenMousePosition.y == 0)
             {
-                context.screenMousePosition.x = 1000;
-                context.screenMousePosition.y = 450;
+                context.screenMousePosition.x = editorWindow.position.x + editorWindow.position.width/2;
+                context.screenMousePosition.y = (editorWindow.position.y + editorWindow.position.height/2) - 120;
             }
             SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
         };
@@ -68,7 +68,7 @@ public class DialogueGraphView : GraphView
         propertySearchWindow = ScriptableObject.CreateInstance<PropertySearchWindow>();
         propertySearchWindow.Init(this);
         Blackboard.addItemRequested = context =>
-            SearchWindow.Open(new SearchWindowContext(new Vector2(50,50)), propertySearchWindow);
+            SearchWindow.Open(new SearchWindowContext(new Vector2(editorWindow.position.x + 125,editorWindow.position.y + 60)), propertySearchWindow);
     }
 
     public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
