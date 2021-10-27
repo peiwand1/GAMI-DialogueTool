@@ -39,7 +39,7 @@ MonoBehaviour:
     TargetNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
   - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
     PortName: Left Door
-    ConditionBoolean: TestBool
+    ConditionBoolean: No condition
     TargetNodeGuid: a2de3242-5b04-42a0-bd34-1b396df3f460
   - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
     PortName: Right Door

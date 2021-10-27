@@ -11,9 +11,7 @@ public class DialogueGraph : EditorWindow
     private DialogueGraphView _graphView;
     private string _fileName = "New Narrative";
     private MiniMap _miniMap;
-    // private string path = "Assets/Resources/GraphData/previousGraph.txt";
-    private GraphSaveUtility _graphSaveUtility;
-
+    private string path = "Assets/Resources/GraphData/previousGraph.txt";
 
     [MenuItem("Graph/Dialogue Graph")]
     public static void OpenDialogueGraphWindow()
@@ -22,49 +20,18 @@ public class DialogueGraph : EditorWindow
         window.titleContent = new GUIContent("Dialogue Graph");
     }
 
-    // private void OnEnable()
-    // {
-    //     string previousGraph = LoadPreviousGraph();
-    //     if (previousGraph.Equals(""))
-    //     {
-    //         MakeNewGraph();
-    //     }
-    //     else
-    //     {
-    //         _fileName = previousGraph;
-    //         MakeNewGraph();
-    //         GraphSaveUtility.GetInstance(_graphView).LoadGraph(previousGraph);
-    //     }
-    // }
-    
     private void OnEnable()
     {
-        MakeNewGraph();
-        _graphSaveUtility = GraphSaveUtility.GetInstance(_graphView);
-        string previousGraph = _graphSaveUtility.LoadPreviousGraph();
-        if(!previousGraph.Equals(""))
+        string previousGraph = LoadPreviousGraph();
+        if (previousGraph.Equals(""))
+        {
+            MakeNewGraph();
+        }
+        else
         {
             _fileName = previousGraph;
-            ChangeFileNameInToolbar(_fileName);
-            // ((TextField)((Toolbar)_graphView.EditorWindow.rootVisualElement[1])[0]).value = _fileName;
-            GraphSaveUtility.GetInstance(_graphView).LoadGraph(previousGraph);
-        }
-    }
-
-    private void ChangeFileNameInToolbar(string fileName)
-    {
-        foreach (var toolbarElement in _graphView.EditorWindow.rootVisualElement.Children())
-        {
-            if (toolbarElement is Toolbar)
-            {
-                foreach (var fieldElement in toolbarElement.Children())
-                {
-                    if (fieldElement is TextField)
-                    {
-                        ((TextField)fieldElement).value = fileName;
-                    }
-                }
-            }
+            MakeNewGraph();
+            RequestDataOperation(false);
         }
     }
 
@@ -112,8 +79,8 @@ public class DialogueGraph : EditorWindow
 
     private void OnDisable()
     {
-        GraphSaveUtility.GetInstance(_graphView).SaveGraph(_fileName);
-        _graphSaveUtility.SavePreviousGraph(_fileName);
+        RequestDataOperation(true);
+        SavePreviousGraph(_fileName);
         rootVisualElement.Clear();
     }
 
@@ -159,7 +126,9 @@ public class DialogueGraph : EditorWindow
             EditorUtility.DisplayDialog("Invalid file name", "Please enter a valid file name.", "OK");
             return;
         }
+
         var saveUtility = GraphSaveUtility.GetInstance(_graphView);
+
         if (save)
         {
             saveUtility.SaveGraph(_fileName);
@@ -170,26 +139,26 @@ public class DialogueGraph : EditorWindow
         }
     }
 
-    // private void SavePreviousGraph(string previousGraph)
-    // {
-    //     File.Create(path).Close();
-    //     StreamWriter writer = new StreamWriter(path);
-    //     writer.WriteLine(previousGraph);
-    //     writer.Close();
-    // }
-    //
-    // private string LoadPreviousGraph()
-    // {
-    //     if (!File.Exists(path))
-    //     {
-    //         FileInfo file = new FileInfo(path);
-    //         file.Directory.Create();
-    //         SavePreviousGraph("");
-    //     }
-    //     
-    //     StreamReader reader = new StreamReader(path); 
-    //     string fileContent = reader.ReadLine();
-    //     reader.Close();
-    //     return fileContent;
-    // }
+    private void SavePreviousGraph(string previousGraph)
+    {
+        File.Create(path).Close();
+        StreamWriter writer = new StreamWriter(path);
+        writer.WriteLine(previousGraph);
+        writer.Close();
+    }
+    
+    private string LoadPreviousGraph()
+    {
+        if (!File.Exists(path))
+        {
+            FileInfo file = new FileInfo(path);
+            file.Directory.Create();
+            SavePreviousGraph("");
+        }
+        
+        StreamReader reader = new StreamReader(path); 
+        string fileContent = reader.ReadLine();
+        reader.Close();
+        return fileContent;
+    }
 }
