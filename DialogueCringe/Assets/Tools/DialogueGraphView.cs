@@ -13,7 +13,7 @@ using Label = UnityEngine.UIElements.Label;
 
 public class DialogueGraphView : GraphView
 {
-    public readonly Vector2 defaultNodeSize = new Vector2(150, 400);
+    public readonly Vector2 defaultNodeSize = new Vector2(150, 200);
     public Blackboard Blackboard;
     public List<ExposedProperty> ExposedProperties = new List<ExposedProperty>();
     private NodeSearchWindow searchWindow;
@@ -172,6 +172,8 @@ public class DialogueGraphView : GraphView
         variableDropdown.choices = variables.Select(x => x.PropertyName).ToList();
         variableDropdown.choices.Add("No condition");
         variableDropdown.value = "No condition";
+        variableDropdown.style.minWidth = new StyleLength(100);
+        variableDropdown.style.maxWidth = new StyleLength(100);
         generatedPort.contentContainer.Add(variableDropdown);
         textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
         generatedPort.contentContainer.Add( new Label(" "));

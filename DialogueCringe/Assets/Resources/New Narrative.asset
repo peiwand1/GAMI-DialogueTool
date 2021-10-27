@@ -15,17 +15,32 @@ MonoBehaviour:
   DialogueNodeData:
   - NodeGUID: 216c5499-39c8-4f94-9941-4ada22b93877
     DialogueText: Dialogue Node
-    Position: {x: 0, y: 0}
+    Position: {x: 694, y: 180}
+  - NodeGUID: 87abfabb-59b4-4551-a4dc-f15af3f5a735
+    DialogueText: Dialogue Node
+    Position: {x: 694, y: 315}
   - NodeGUID: 95f918e1-e237-466b-b8b1-bf96589afa28
     DialogueText: Dialogue Node
-    Position: {x: 471, y: 357}
+    Position: {x: 309, y: 238}
   NodeLinks:
   - BaseNodeGuid: bf2368c2-16eb-4d98-a4fc-c15dc40c0f9e
     PortName: Next
     TargetNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
+  - BaseNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
+    PortName: Choice 1
+    TargetNodeGuid: 216c5499-39c8-4f94-9941-4ada22b93877
+  - BaseNodeGuid: 95f918e1-e237-466b-b8b1-bf96589afa28
+    PortName: Choice 2
+    TargetNodeGuid: 87abfabb-59b4-4551-a4dc-f15af3f5a735
   ExposedStringProperties: []
   ExposedBooleanProperties:
-  - PropertyName: New Boolean
+  - PropertyName: Test
+    PropertyValue: 1
+    PropertyType: Boolean
+  - PropertyName: idkwhatimdoing
+    PropertyValue: 1
+    PropertyType: Boolean
+  - PropertyName: asjhdkashdjkashdjkashdjkashdjkhaskd
     PropertyValue: 1
     PropertyType: Boolean
   ExposedIntegerProperties: []
