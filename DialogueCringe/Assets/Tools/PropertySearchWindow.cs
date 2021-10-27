@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Tools.Runtime.Properties;
-using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -65,5 +64,9 @@ public class PropertySearchWindow : ScriptableObject, ISearchWindowProvider
     private void AddPropertyToBlackboard(string propertyName, string propertyType)
     {
         _graphView.AddPropertyToBlackboard(new ExposedProperty(propertyName, propertyType));
+        if (propertyType.Equals("Boolean"))
+        {
+            //TODO: Implement saving and reloading
+        }
     }
 }

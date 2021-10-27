@@ -346,14 +346,19 @@ public class DialogueGraphView : GraphView
         container.AddManipulator(new ContextualMenuManipulator((evt) =>
         {
             var propertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
-            evt.menu.AppendAction("Delete", (a) => RemovePropertyFromBlackboard(container, propertyIndex), DropdownMenuAction.AlwaysEnabled);
+            evt.menu.AppendAction("Delete", (a) => RemovePropertyFromBlackboard(container, propertyIndex, property.PropertyType), DropdownMenuAction.AlwaysEnabled);
         }));
         Blackboard.Add(container);
     }
 
-    private void RemovePropertyFromBlackboard(VisualElement property, int placeInList)
+    private void RemovePropertyFromBlackboard(VisualElement property, int placeInList, String propertyType)
     {
         Blackboard.Remove(property);
         ExposedProperties.RemoveAt(placeInList);
+
+        if (propertyType.Equals("Boolean"))
+        {
+            //TODO: Implement saving and reloading
+        }
     }
 }
