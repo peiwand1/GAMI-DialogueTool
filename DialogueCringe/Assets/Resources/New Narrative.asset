@@ -49,5 +49,8 @@ MonoBehaviour:
   - PropertyName: New Boolean(1)
     PropertyValue: 0
     PropertyType: Boolean
+  - PropertyName: New Boolean(1)(1)
+    PropertyValue: 0
+    PropertyType: Boolean
   ExposedIntegerProperties: []
   ExposedFloatProperties: []

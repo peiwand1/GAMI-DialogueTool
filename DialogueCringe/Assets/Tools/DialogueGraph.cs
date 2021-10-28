@@ -78,7 +78,6 @@ public class DialogueGraph : EditorWindow
     
     private void Update()
     {
-        //TODO: make a function to check if the windowsize changed, then change the position
         _miniMap.SetPosition(new Rect(_graphView.EditorWindow.position.width - 210, 30, 200, 140));
     }
 
