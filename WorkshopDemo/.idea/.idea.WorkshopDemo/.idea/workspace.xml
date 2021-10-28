@@ -8,12 +8,11 @@
       <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/PropertySearchWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/PropertySearchWindow.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/NPC 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/NPC 1.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tools/PropertySearchWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/PropertySearchWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/NodeSearchWindow.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/NodeSearchWindow.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +85,7 @@
       <workItem from="1635279318240" duration="3001000" />
       <workItem from="1635350313905" duration="771000" />
       <workItem from="1635364608684" duration="3942000" />
+      <workItem from="1635442631015" duration="795000" />
     </task>
     <servers />
   </component>

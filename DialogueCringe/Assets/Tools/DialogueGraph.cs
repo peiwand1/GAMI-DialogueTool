@@ -48,22 +48,30 @@ public class DialogueGraph : EditorWindow
         var _blackboard = new Blackboard(_graphView);
         _blackboard.Add(new BlackboardSection { title = "Exposed Properties" });
         
-        _blackboard.editTextRequested = (blackboard1, element, newValue) =>
+        _blackboard.editTextRequested = (blackboard1, element, newPropertyName) =>
         {
             var oldPropertyName = ((BlackboardField)element).text;
-            if (_graphView.ExposedProperties.Any(x => x.PropertyName.ToLower().Equals(newValue.ToLower())))
+            if (_graphView.ExposedProperties.Any(x => x.PropertyName.ToLower().Equals(newPropertyName.ToLower())))
             {
-                EditorUtility.DisplayDialog("Error", "This property name already exists, pleas choose another one!",
+                EditorUtility.DisplayDialog("Error", "This property name already exists, please choose another one!",
                     "OK");
                 return;
             }
 
             var propertyIndex = _graphView.ExposedProperties.FindIndex(x => x.PropertyName.Equals(oldPropertyName));
-            _graphView.ExposedProperties[propertyIndex].PropertyName = newValue;
-            ((BlackboardField)element).text = newValue;
+            var property = _graphView.ExposedProperties[propertyIndex];
+            property.PropertyName = newPropertyName;
+            ((BlackboardField)element).text = newPropertyName;
+            if (property.PropertyType.Equals("Boolean"))
+            {
+                _graphView.oldConditionName = oldPropertyName;
+                _graphView.newConditionName = newPropertyName;                
+                _graphView.RefreshDropdown(property.PropertyType);
+            }
         };
-
-        _blackboard.SetPosition(new Rect(10, 30, 200, 140));
+        
+        _blackboard.SetPosition(new Rect(10, 30, 200, 300));
+        _blackboard.scrollable = true;
         _graphView.Add(_blackboard);
         _graphView.Blackboard = _blackboard;
         _graphView.AddPropertySearchWindow(_graphView.EditorWindow);
@@ -110,7 +118,7 @@ public class DialogueGraph : EditorWindow
 
         toolbar.Add(new Button(() => RequestDataOperation(true)) { text = "Save Data" });
         toolbar.Add(new Button(() => RequestDataOperation(false)) { text = "Load Data" });
-        toolbar.Add(new Button(() => _graphView.OpenSearchWindow()) { text = "New Node" });
+        toolbar.Add(new Button(() => _graphView.OpenNodeSearchWindow()) { text = "New Node" });
         toolbar.Add(new Button(() => NewGraphButton()) { text = "New Graph" });
 
         rootVisualElement.Add(toolbar);

@@ -20,6 +20,8 @@ public class DialogueGraphView : GraphView
     private PropertySearchWindow propertySearchWindow;
     public DialogueGraph EditorWindow;
     public Texture2D _indentationIcon;
+    public string oldConditionName;
+    public string newConditionName;
 
     public DialogueGraphView(DialogueGraph editorWindow)
     {
@@ -40,10 +42,10 @@ public class DialogueGraphView : GraphView
         grid.StretchToParentSize();
 
         AddElement(GenerateEntryPointNode());
-        AddSearchWindow(editorWindow);
+        AddNodeSearchWindow(editorWindow);
     }
 
-    private void AddSearchWindow(EditorWindow editorWindow)
+    private void AddNodeSearchWindow(EditorWindow editorWindow)
     {
         searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
         searchWindow.Init(editorWindow, this);
@@ -58,7 +60,7 @@ public class DialogueGraphView : GraphView
         };
     }
 
-    public void OpenSearchWindow()
+    public void OpenNodeSearchWindow()
     {
         nodeCreationRequest.Invoke(default);
     }
@@ -200,6 +202,10 @@ public class DialogueGraphView : GraphView
         {
             variableDropdown.value = overrideConditionBoolean;
         }
+        else if (overrideConditionBoolean.Equals(oldConditionName))
+        {
+            variableDropdown.value = newConditionName;
+        }
         else
         {
             variableDropdown.value = "No condition";
@@ -247,7 +253,7 @@ public class DialogueGraphView : GraphView
 
         var container = new VisualElement();
         dynamic propertyValueField = new TextField();
-        var blackboardField = new BlackboardField { text = property.PropertyName, typeText = "" };
+        var blackboardField = new BlackboardField { text = property.PropertyName };
 
         switch (localPropertyType)
         {
