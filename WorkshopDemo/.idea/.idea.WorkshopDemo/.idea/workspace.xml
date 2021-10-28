@@ -5,14 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f0e5d36-59da-4360-bc5f-ae7fa3ed3b07" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tools/ConditionNode.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tools/ConditionNode.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tools/Resources/ConditionNode.uss.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tools/Resources/DialogNode.uss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tools/Runtime/ConditionNodeData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tools/Runtime/ConditionNodeData.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/NPC 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/NPC 1.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tools/NodeSearchWindow.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/NodeSearchWindow.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/NodeSearchWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/NodeSearchWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/Resources/Node.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/Resources/ConditionNode.uss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/Resources/Node.uss.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/Resources/DialogNode.uss.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/Runtime/DialogueContainer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/Runtime/DialogueContainer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/Runtime/DialogueNodeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/Runtime/DialogueNodeData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/Runtime/GraphSaveUtility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/Runtime/GraphSaveUtility.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +32,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NPC2_ChoiceHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/33feec9ae0084068845fa08e854b12423ce00/52/d2451305/Node.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Tools/Runtime/GraphSaveUtility.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1zhwNzwFVwliWQA6WfMnG1rpfGJ" />
@@ -85,7 +94,7 @@
       <workItem from="1635279318240" duration="3001000" />
       <workItem from="1635350313905" duration="771000" />
       <workItem from="1635364608684" duration="3942000" />
-      <workItem from="1635442631015" duration="795000" />
+      <workItem from="1635442631015" duration="4699000" />
     </task>
     <servers />
   </component>

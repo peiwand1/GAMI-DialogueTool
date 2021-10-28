@@ -14,40 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogueNodeData:
   - NodeGUID: 315d4bef-8534-458e-82e8-dbf8ca16eb50
-    DialogueText: Right Door
+    DialogueText: Right Door Opened
     Position: {x: 1175, y: 353}
   - NodeGUID: a2de3242-5b04-42a0-bd34-1b396df3f460
-    DialogueText: Left Door
+    DialogueText: Left Door Opened
     Position: {x: 1175, y: 243}
-  - NodeGUID: 26f342ad-7537-4503-8e1e-9f6daf98c73e
-    DialogueText: Hello, {PlayerName}
-    Position: {x: 270, y: 305}
   - NodeGUID: 10344947-d37d-40db-be93-ba19980af4b3
     DialogueText: You have two choices. Which door do you want to open?
-    Position: {x: 594, y: 305}
+    Position: {x: 626, y: 305}
+  - NodeGUID: 34c640fe-3836-4c5a-a90a-7acfdf046b9e
+    DialogueText: You Don't Have a Key
+    Position: {x: 503, y: 22}
+  - NodeGUID: 26f342ad-7537-4503-8e1e-9f6daf98c73e
+    DialogueText: Hello, {PlayerName}
+    Position: {x: -76, y: 284}
   NodeLinks:
   - BaseNodeGuid: bc1f32aa-27f4-496d-9a78-9a6211dc513e
     PortName: Next
     ConditionBoolean: 
     TargetNodeGuid: 26f342ad-7537-4503-8e1e-9f6daf98c73e
-  - BaseNodeGuid: 26f342ad-7537-4503-8e1e-9f6daf98c73e
-    PortName: Continue
-    ConditionBoolean: No condition
-    TargetNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
   - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
     PortName: Left Door
-    ConditionBoolean: No condition
+    ConditionBoolean: HasKey
     TargetNodeGuid: a2de3242-5b04-42a0-bd34-1b396df3f460
   - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
     PortName: Right Door
-    ConditionBoolean: No condition
+    ConditionBoolean: HasKey
     TargetNodeGuid: 315d4bef-8534-458e-82e8-dbf8ca16eb50
+  - BaseNodeGuid: 34c640fe-3836-4c5a-a90a-7acfdf046b9e
+    PortName: Continue
+    ConditionBoolean: No condition
+    TargetNodeGuid: 26f342ad-7537-4503-8e1e-9f6daf98c73e
   ExposedStringProperties:
   - PropertyName: PlayerName
     PropertyValue: Tim
     PropertyType: String
   ExposedBooleanProperties:
-  - PropertyName: dfgdggf
+  - PropertyName: HasKey
     PropertyValue: 0
     PropertyType: Boolean
   ExposedIntegerProperties: []

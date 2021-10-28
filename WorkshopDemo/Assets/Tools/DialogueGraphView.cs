@@ -22,6 +22,7 @@ public class DialogueGraphView : GraphView
     public Texture2D _indentationIcon;
     public string oldConditionName;
     public string newConditionName;
+    public List<string> evaluations = new List<string>() {"=="};
 
     public DialogueGraphView(DialogueGraph editorWindow)
     {
@@ -87,7 +88,7 @@ public class DialogueGraphView : GraphView
         return compatiblePorts;
     }
 
-    private Port GeneratePort(DialogueNode node, Direction portDirection, Port.Capacity capacity = Port.Capacity.Single)
+    private Port GeneratePort(Node node, Direction portDirection, Port.Capacity capacity = Port.Capacity.Single)
     {
         return node.InstantiatePort(Orientation.Horizontal, portDirection, capacity, typeof(float));
     }
@@ -107,6 +108,7 @@ public class DialogueGraphView : GraphView
         node.outputContainer.Add(generatedNode);
 
         node.capabilities &= ~Capabilities.Deletable;
+
         node.RefreshExpandedState();
         node.RefreshPorts();
 
@@ -114,9 +116,16 @@ public class DialogueGraphView : GraphView
         return node;
     }
 
-    public void CreateNode(string nodeName, Vector2 mousePosition)
+    public void CreateNode(string nodeName, Vector2 mousePosition, string nodeType)
     {
-        AddElement(CreateDialogueNode(nodeName, mousePosition));
+        if (nodeType.Equals("Dialog"))
+        {
+            AddElement(CreateDialogueNode(nodeName, mousePosition));
+        }
+        if (nodeType.Equals("Condition"))
+        {
+            AddElement(CreateConditionNode(nodeName, mousePosition));
+        }
     }
 
     public DialogueNode CreateDialogueNode(string nodeName, Vector2 mousePosition)
@@ -131,7 +140,7 @@ public class DialogueGraphView : GraphView
         inputPort.portName = "Input";
         dialogueNode.inputContainer.Add(inputPort);
 
-        dialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+        dialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("DialogNode"));
 
         var button = new Button(()=> { AddChoicePort(dialogueNode); });
         button.text = "New Choice";
@@ -153,7 +162,7 @@ public class DialogueGraphView : GraphView
         return dialogueNode;
     }
 
-    public void AddChoicePort(DialogueNode dialogueNode, string overriddenPortName = "", string overrideConditionBoolean = "No condition")
+    public void AddChoicePort(Node dialogueNode, string overriddenPortName = "", string overrideConditionBoolean = "No condition")
     {
         var generatedPort = GeneratePort(dialogueNode, Direction.Output);
 
@@ -215,7 +224,7 @@ public class DialogueGraphView : GraphView
         return variableDropdown;
     }
 
-    private void RemovePort(DialogueNode dialogueNode, Port generatedPort)
+    private void RemovePort(Node dialogueNode, Port generatedPort)
     {
         var targetEdge = edges.ToList().Where(x => x.output.portName == generatedPort.portName && x.output.node == generatedPort.node);
         if (targetEdge.Any())
@@ -372,5 +381,56 @@ public class DialogueGraphView : GraphView
             EditorWindow.RequestDataOperation(true);
             EditorWindow.RequestDataOperation(false);
         }
+    }
+
+    public ConditionNode CreateConditionNode(string nodeName, Vector2 mousePosition)
+    {
+        var conditionNode = new ConditionNode
+        {
+            title = nodeName,
+            GUID = Guid.NewGuid().ToString()
+        };
+        var inputPort = GeneratePort(conditionNode, Direction.Input, Port.Capacity.Multi);
+        inputPort.portName = "Input";
+        conditionNode.inputContainer.Add(inputPort);
+
+        conditionNode.styleSheets.Add(Resources.Load<StyleSheet>("ConditionNode"));
+        
+        conditionNode.mainContainer.Add(GenerateDropdown(""));
+        // conditionNode.mainContainer.Add(GenerateEvaluationsDropdown());
+        // conditionNode.mainContainer.Add(new TextField());
+
+        AddTrueFalsePorts(conditionNode);
+
+        conditionNode.RefreshExpandedState();
+        conditionNode.RefreshPorts();
+        conditionNode.SetPosition(new Rect(mousePosition, defaultNodeSize));
+
+        return conditionNode;
+    }
+
+    // private DropdownField GenerateEvaluationsDropdown()
+    // {
+    //     var EvaluationsDropdown = new DropdownField();
+    //     EvaluationsDropdown.choices.AddRange(evaluations);
+    //     EvaluationsDropdown.value = evaluations[0];
+    //     EvaluationsDropdown.style.minWidth = new StyleLength(100);
+    //     EvaluationsDropdown.style.maxWidth = new StyleLength(100);
+    //     return EvaluationsDropdown;
+    // }
+
+    private void AddTrueFalsePorts(ConditionNode node)
+    {
+        var truePort = GeneratePort(node, Direction.Output);
+        truePort.portName = "True";
+        
+        var falsePort = GeneratePort(node, Direction.Output);
+        falsePort.portName = "False";
+        
+        node.outputContainer.Add(truePort);
+        node.outputContainer.Add(falsePort);
+
+        node.RefreshExpandedState();
+        node.RefreshPorts();
     }
 }

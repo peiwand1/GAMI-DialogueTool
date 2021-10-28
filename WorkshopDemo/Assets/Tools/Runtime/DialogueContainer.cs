@@ -7,6 +7,8 @@ using UnityEngine;
 public class DialogueContainer : ScriptableObject
 {
     public List<DialogueNodeData> DialogueNodeData = new List<DialogueNodeData>();
+    
+    public List<ConditionNodeData> ConditionNodeData = new List<ConditionNodeData>();
 
     public List<NodeLinkData> NodeLinks = new List<NodeLinkData>();
     

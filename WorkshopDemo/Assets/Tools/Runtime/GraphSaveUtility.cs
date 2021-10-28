@@ -12,7 +12,18 @@ public class GraphSaveUtility
     private DialogueGraphView _targetGraphView;
     private DialogueContainer _containerCache;
     private List<Edge> Edges => _targetGraphView.edges.ToList();
-    private List<DialogueNode> Nodes => _targetGraphView.nodes.ToList().Cast<DialogueNode>().ToList();
+    private List<DialogueNode> DialogueNodes
+    {
+        get
+        {
+            foreach (Node node in _targetGraphView.nodes)
+            {
+                if
+            }
+        }
+    }
+
+    private List<ConditionNode> ConditionNodes => _targetGraphView.nodes.ToList().Cast<ConditionNode>().ToList();
 
     public static GraphSaveUtility GetInstance(DialogueGraphView targetGraphView)
     {
@@ -91,7 +102,7 @@ public class GraphSaveUtility
             });
         }
 
-        foreach(var dialogueNode in Nodes.Where(node => !node.Entrypoint))
+        foreach(var dialogueNode in DialogueNodes.Where(node => !node.Entrypoint))
         {
             dialogueContainer.DialogueNodeData.Add(new DialogueNodeData
             {
@@ -189,14 +200,14 @@ public class GraphSaveUtility
 
     private void ConnectNodes()
     {
-        for (int i = 0; i< Nodes.Count; i++)
+        for (int i = 0; i< DialogueNodes.Count; i++)
         {
-            var connections = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == Nodes[i].GUID).ToList();
+            var connections = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == DialogueNodes[i].GUID).ToList();
             for(var j = 0; j < connections.Count; j++)
             {
                 var targetNodeGuid = connections[j].TargetNodeGuid;
-                var targetNode = Nodes.First(x => x.GUID == targetNodeGuid);
-                LinkNodes(Nodes[i].outputContainer[j].Q<Port>(), (Port)targetNode.inputContainer[0]);
+                var targetNode = DialogueNodes.First(x => x.GUID == targetNodeGuid);
+                LinkNodes(DialogueNodes[i].outputContainer[j].Q<Port>(), (Port)targetNode.inputContainer[0]);
                 targetNode.SetPosition(new Rect
                 (
                     _containerCache.DialogueNodeData.First(x => x.NodeGUID == targetNodeGuid).Position,
@@ -230,13 +241,23 @@ public class GraphSaveUtility
             var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.NodeGUID).ToList();
             nodePorts.ForEach(x => _targetGraphView.AddChoicePort(tempNode, x.PortName, x.ConditionBoolean));
         }
+        
+        foreach(var nodeData in _containerCache.ConditionNodeData)
+        {
+            var tempNode = _targetGraphView.CreateConditionNode(nodeData.DialogueText, Vector2.zero);
+            tempNode.GUID = nodeData.NodeGUID;
+            _targetGraphView.AddElement(tempNode);
+
+            var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.NodeGUID).ToList();
+            nodePorts.ForEach(x => _targetGraphView.AddChoicePort(tempNode, x.PortName, x.ConditionBoolean));
+        }
     }
 
     private void ClearGraph()
     {
-        Nodes.Find(x => x.Entrypoint).GUID = _containerCache.NodeLinks[0].BaseNodeGuid;
+        DialogueNodes.Find(x => x.Entrypoint).GUID = _containerCache.NodeLinks[0].BaseNodeGuid;
         
-        foreach (var perNode in Nodes)
+        foreach (var perNode in DialogueNodes)
         {
             if (perNode.Entrypoint) continue;
             Edges.Where(x => x.input.node == perNode).ToList().ForEach(edge => _targetGraphView.RemoveElement(edge));

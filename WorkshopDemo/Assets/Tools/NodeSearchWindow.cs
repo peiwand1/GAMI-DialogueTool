@@ -25,6 +25,10 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
             new SearchTreeEntry(new GUIContent("Dialogue Node", _indentationIcon))            
             {
                 userData = new DialogueNode(), level = 1
+            },
+            new SearchTreeEntry(new GUIContent("Condition Node", _indentationIcon))            
+            {
+            userData = new ConditionNode(), level = 1
             }
         };
         return tree;
@@ -38,7 +42,10 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
         switch (SearchTreeEntry.userData)
         {
             case DialogueNode dialogueNode:
-                _graphView.CreateNode("Dialogue Node", localMousePosition);
+                _graphView.CreateNode("Dialogue Node", localMousePosition, "Dialog");
+                return true;
+            case ConditionNode conditionNode:
+                _graphView.CreateNode("Condition Node", localMousePosition, "Condition");
                 return true;
             default:
                 return false;
