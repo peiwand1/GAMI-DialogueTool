@@ -72,9 +72,14 @@ public class DialogueGraph : EditorWindow
     private void GenerateMiniMap()
     {
         _miniMap = new MiniMap{ anchored = true };
-        var cords = _graphView.contentViewContainer.WorldToLocal(new Vector2(position.width - 10, 30));
-        _miniMap.SetPosition(new Rect(cords.x, cords.y, 200, 140));
+        _miniMap.SetPosition(new Rect(_graphView.EditorWindow.position.width - 210, 30, 200, 140));
         _graphView.Add(_miniMap);
+    }
+    
+    private void Update()
+    {
+        //TODO: make a function to check if the windowsize changed, then change the position
+        _miniMap.SetPosition(new Rect(_graphView.EditorWindow.position.width - 210, 30, 200, 140));
     }
 
     private void OnDisable()
