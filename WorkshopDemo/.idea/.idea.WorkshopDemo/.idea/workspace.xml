@@ -7,8 +7,13 @@
     <list default="true" id="8f0e5d36-59da-4360-bc5f-ae7fa3ed3b07" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/PropertySearchWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/PropertySearchWindow.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/NPC 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/NPC 1.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tools/PropertySearchWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/PropertySearchWindow.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

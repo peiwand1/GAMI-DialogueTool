@@ -36,18 +36,18 @@ MonoBehaviour:
     TargetNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
   - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
     PortName: Left Door
-    ConditionBoolean: HasKey
+    ConditionBoolean: No condition
     TargetNodeGuid: a2de3242-5b04-42a0-bd34-1b396df3f460
   - BaseNodeGuid: 10344947-d37d-40db-be93-ba19980af4b3
     PortName: Right Door
-    ConditionBoolean: HasKey
+    ConditionBoolean: No condition
     TargetNodeGuid: 315d4bef-8534-458e-82e8-dbf8ca16eb50
   ExposedStringProperties:
   - PropertyName: PlayerName
     PropertyValue: Tim
     PropertyType: String
   ExposedBooleanProperties:
-  - PropertyName: HasKey
+  - PropertyName: dfgdggf
     PropertyValue: 0
     PropertyType: Boolean
   ExposedIntegerProperties: []

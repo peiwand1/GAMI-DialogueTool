@@ -36,8 +36,8 @@ MonoBehaviour:
     ConditionBoolean: TestBool2
     TargetNodeGuid: 13e47fff-3273-4310-8083-5b2dac245c9c
   ExposedStringProperties:
-  - PropertyName: New String
-    PropertyValue: New String
+  - PropertyName: asdasdasd
+    PropertyValue: 
     PropertyType: String
   ExposedBooleanProperties:
   - PropertyName: TestBool2
@@ -50,6 +50,9 @@ MonoBehaviour:
     PropertyValue: 0
     PropertyType: Boolean
   - PropertyName: New Boolean(1)(1)
+    PropertyValue: 0
+    PropertyType: Boolean
+  - PropertyName: cvbcb
     PropertyValue: 0
     PropertyType: Boolean
   ExposedIntegerProperties: []

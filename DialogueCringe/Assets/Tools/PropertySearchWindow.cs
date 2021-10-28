@@ -64,9 +64,6 @@ public class PropertySearchWindow : ScriptableObject, ISearchWindowProvider
     private void AddPropertyToBlackboard(string propertyName, string propertyType)
     {
         _graphView.AddPropertyToBlackboard(new ExposedProperty(propertyName, propertyType));
-        if (propertyType.Equals("Boolean"))
-        {
-            //TODO: Implement saving and reloading
-        }
+        _graphView.RefreshDropdown(propertyType);
     }
 }

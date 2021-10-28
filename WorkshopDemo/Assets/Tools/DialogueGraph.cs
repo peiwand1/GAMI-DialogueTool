@@ -123,7 +123,7 @@ public class DialogueGraph : EditorWindow
         MakeNewGraph();
     }
 
-    private void RequestDataOperation(bool save)
+    public void RequestDataOperation(bool save)
     {
         if (string.IsNullOrEmpty(_fileName))
         {

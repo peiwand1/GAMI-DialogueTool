@@ -18,10 +18,10 @@ public class DialogueGraphView : GraphView
     public List<ExposedProperty> ExposedProperties = new List<ExposedProperty>();
     private NodeSearchWindow searchWindow;
     private PropertySearchWindow propertySearchWindow;
-    public EditorWindow EditorWindow;
+    public DialogueGraph EditorWindow;
     public Texture2D _indentationIcon;
 
-    public DialogueGraphView(EditorWindow editorWindow)
+    public DialogueGraphView(DialogueGraph editorWindow)
     {
         _indentationIcon = new Texture2D(1, 1);
         _indentationIcon.SetPixel(0,0, new Color(0,0,0,0));
@@ -351,14 +351,20 @@ public class DialogueGraphView : GraphView
         Blackboard.Add(container);
     }
 
-    private void RemovePropertyFromBlackboard(VisualElement property, int placeInList, String propertyType)
+    private void RemovePropertyFromBlackboard(VisualElement property, int placeInList, string propertyType)
     {
         Blackboard.Remove(property);
         ExposedProperties.RemoveAt(placeInList);
 
+        RefreshDropdown(propertyType);
+    }
+
+    public void RefreshDropdown(string propertyType)
+    {
         if (propertyType.Equals("Boolean"))
         {
-            //TODO: Implement saving and reloading
+            EditorWindow.RequestDataOperation(true);
+            EditorWindow.RequestDataOperation(false);
         }
     }
 }
