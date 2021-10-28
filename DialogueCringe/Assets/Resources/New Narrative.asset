@@ -29,7 +29,7 @@ MonoBehaviour:
     TargetNodeGuid: 54d74565-4685-4741-ab97-2f77184baef9
   - BaseNodeGuid: 54d74565-4685-4741-ab97-2f77184baef9
     PortName: Choice 1
-    ConditionBoolean: New Boolean
+    ConditionBoolean: New Boolean(1)
     TargetNodeGuid: 8bad5bf7-6317-4091-9f0c-3d007139228c
   - BaseNodeGuid: 54d74565-4685-4741-ab97-2f77184baef9
     PortName: Choice 2
