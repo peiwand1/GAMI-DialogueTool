@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f0e5d36-59da-4360-bc5f-ae7fa3ed3b07" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Scripts/DialogueParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Scripts/DialogueParser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/GraphData/previousGraph.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/GraphData/previousGraph.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueParser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/NPC 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/NPC 1.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +82,7 @@
       <workItem from="1635350313905" duration="771000" />
       <workItem from="1635364608684" duration="3942000" />
       <workItem from="1635442631015" duration="795000" />
-      <workItem from="1635618153473" duration="946000" />
+      <workItem from="1635618153473" duration="1540000" />
     </task>
     <servers />
   </component>
