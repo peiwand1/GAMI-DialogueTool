@@ -76,30 +76,33 @@ public class DialogueParser : MonoBehaviour
     private string ProcessProperties(string text)
     {
         string newText = text;
-        foreach (var exposedProperty in dialogue.ExposedStringProperties)
+        if (text.Contains("{"))
         {
-            text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue);
-            newText = text.Replace("{", "").Replace("}", "");
+            foreach (var exposedProperty in dialogue.ExposedStringProperties)
+            {
+                text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue);
+                newText = text.Replace("{", "").Replace("}", "");
+            }
+
+            foreach (var exposedProperty in dialogue.ExposedBooleanProperties)
+            {
+                text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue.ToString());
+                newText = text.Replace("{", "").Replace("}", "");
+            }
+
+            foreach (var exposedProperty in dialogue.ExposedIntegerProperties)
+            {
+                text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue.ToString());
+                newText = text.Replace("{", "").Replace("}", "");
+            }
+
+            foreach (var exposedProperty in dialogue.ExposedFloatProperties)
+            {
+                text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue.ToString());
+                newText = text.Replace("{", "").Replace("}", "");
+            }
         }
-        
-        foreach (var exposedProperty in dialogue.ExposedBooleanProperties)
-        {
-            text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue.ToString());
-            newText = text.Replace("{", "").Replace("}", "");
-        }
-        
-        foreach (var exposedProperty in dialogue.ExposedIntegerProperties)
-        {
-            text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue.ToString());
-            newText = text.Replace("{", "").Replace("}", "");
-        }
-        
-        foreach (var exposedProperty in dialogue.ExposedFloatProperties)
-        {
-            text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue.ToString());
-            newText = text.Replace("{", "").Replace("}", "");
-        }
-        
+
         return newText;
     }
 
