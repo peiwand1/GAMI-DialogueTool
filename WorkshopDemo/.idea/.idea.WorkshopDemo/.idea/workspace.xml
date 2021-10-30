@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f0e5d36-59da-4360-bc5f-ae7fa3ed3b07" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Resources/New Narrative.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraph.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Scripts/DialogueParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Scripts/DialogueParser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DialogueCringe/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkshopDemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/NPC 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/NPC 1.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraph.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/DialogueGraphView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tools/NodeSearchWindow.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tools/NodeSearchWindow.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/GraphData/previousGraph.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/GraphData/previousGraph.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueParser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +22,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NPC2_ChoiceHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../DialogueCringe/Assets/Scripts/DialogueParser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/33feec9ae0084068845fa08e854b12423ce00/52/d2451305/Node.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Tools/Runtime/GraphSaveUtility.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1zhwNzwFVwliWQA6WfMnG1rpfGJ" />
@@ -86,6 +86,7 @@
       <workItem from="1635350313905" duration="771000" />
       <workItem from="1635364608684" duration="3942000" />
       <workItem from="1635442631015" duration="795000" />
+      <workItem from="1635618153473" duration="946000" />
     </task>
     <servers />
   </component>

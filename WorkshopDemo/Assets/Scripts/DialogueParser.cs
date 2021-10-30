@@ -75,31 +75,27 @@ public class DialogueParser : MonoBehaviour
 
     private string ProcessProperties(string text)
     {
-        string newText = "";
+        string newText = text;
         foreach (var exposedProperty in dialogue.ExposedStringProperties)
         {
-            //newText = text.Replace($"[{exposedProperty.PropertyName}]", exposedProperty.PropertyValue);
             text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue);
             newText = text.Replace("{", "").Replace("}", "");
         }
         
         foreach (var exposedProperty in dialogue.ExposedBooleanProperties)
         {
-            //newText = text.Replace($"[{exposedProperty.PropertyName}]", exposedProperty.PropertyValue);
             text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue.ToString());
             newText = text.Replace("{", "").Replace("}", "");
         }
         
         foreach (var exposedProperty in dialogue.ExposedIntegerProperties)
         {
-            //newText = text.Replace($"[{exposedProperty.PropertyName}]", exposedProperty.PropertyValue);
             text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue.ToString());
             newText = text.Replace("{", "").Replace("}", "");
         }
         
         foreach (var exposedProperty in dialogue.ExposedFloatProperties)
         {
-            //newText = text.Replace($"[{exposedProperty.PropertyName}]", exposedProperty.PropertyValue);
             text = text.Replace($"{exposedProperty.PropertyName}", exposedProperty.PropertyValue.ToString());
             newText = text.Replace("{", "").Replace("}", "");
         }
