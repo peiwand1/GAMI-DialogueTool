@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCHandler : MonoBehaviour
 {
-    [SerializeField] private DialogueContainer dialogue;
+    public DialogueContainer dialogue;
     private DialogueParser parser;
     private bool isSpeaking;
 
@@ -32,6 +32,7 @@ public class NPCHandler : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         if (other.gameObject.tag == "Player") {
             parser.DisableDialogue();
+            isSpeaking = false;
         }
     }
 }

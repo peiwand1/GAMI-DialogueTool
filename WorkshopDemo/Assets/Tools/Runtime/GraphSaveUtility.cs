@@ -14,7 +14,6 @@ public class GraphSaveUtility
     private List<Edge> Edges => _targetGraphView.edges.ToList();
     private List<DialogueNode> Nodes => _targetGraphView.nodes.ToList().Cast<DialogueNode>().ToList();
 
-
     public static GraphSaveUtility GetInstance(DialogueGraphView targetGraphView)
     {
         return new GraphSaveUtility
@@ -25,46 +24,56 @@ public class GraphSaveUtility
 
     public void SaveGraph(string fileName)
     {
-        if (!Edges.Any()) return;
-        var dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
-        
-
-        var connectedPorts = Edges.Where(x => x.input.node != null).ToArray();
-
-        for (var i = 0; i < connectedPorts.Length; i++)
+        if (Edges.Count.Equals(0) || Edges.Find(x => x.output.node.title == "START").Equals(null) || Edges.Equals(null))
         {
-            var outputNode = connectedPorts[i].output.node as DialogueNode;
-            var inputNode = connectedPorts[i].input.node as DialogueNode;
-
-            dialogueContainer.NodeLinks.Add(new NodeLinkData
-            {
-                BaseNodeGuid = outputNode.GUID,
-                PortName = connectedPorts[i].output.portName,
-                TargetNodeGuid = inputNode.GUID
-            });
+            EditorUtility.DisplayDialog("Error", "Start Node must be connected to another node before saving!", "OK");
+            return;
         }
 
-        foreach (var dialogueNode in Nodes.Where(node => !node.Entrypoint))
-        {
-            dialogueContainer.DialogueNodeData.Add(new DialogueNodeData
-            {
-                NodeGUID = dialogueNode.GUID,
-                DialogueText = dialogueNode.dialogueText,
-                Position = dialogueNode.GetPosition().position
-            });
-        }
-        SaveExposedProperties(dialogueContainer);
+        var dialogueContainer = Resources.Load<DialogueContainer>(fileName);
         
-        if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-            AssetDatabase.CreateFolder("Assets", "Resources");
+        if (dialogueContainer != null)
+        {
+            ClearDialogueContainer(dialogueContainer);
+            
+            SaveNodes(dialogueContainer);
+            SaveExposedProperties(dialogueContainer);
+            
+            if (!EditorUtility.IsDirty(dialogueContainer))
+            {
+                EditorUtility.SetDirty(dialogueContainer);
+            }            
+            AssetDatabase.SaveAssets();
+        }
+        else
+        {
+            dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
 
-        AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/{fileName}.asset");
-        AssetDatabase.SaveAssets();
+            SaveNodes(dialogueContainer);
+            SaveExposedProperties(dialogueContainer);
+        
+            if (!AssetDatabase.IsValidFolder("Assets/Resources"))
+                AssetDatabase.CreateFolder("Assets", "Resources");
+    
+            AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/{fileName}.asset");
+            EditorUtility.SetDirty(dialogueContainer);
+            AssetDatabase.SaveAssets(); 
+        }
+    }
+    
+    private void ClearDialogueContainer(DialogueContainer dialogueContainer)
+    {
+        dialogueContainer.NodeLinks.Clear();
+        dialogueContainer.DialogueNodeData.Clear();
+        dialogueContainer.ExposedBooleanProperties.Clear();
+        dialogueContainer.ExposedFloatProperties.Clear();
+        dialogueContainer.ExposedIntegerProperties.Clear();
+        dialogueContainer.ExposedStringProperties.Clear();
     }
 
-    private bool SaveNodes(DialogueContainer dialogueContainer)
+    private void SaveNodes(DialogueContainer dialogueContainer)
     {
-        if (!Edges.Any()) return false;
+        if (!Edges.Any()) return;
         
         var connectedPorts = Edges.Where(x => x.input.node != null).ToArray();
 
@@ -77,6 +86,7 @@ public class GraphSaveUtility
             {
                 BaseNodeGuid = outputNode.GUID,
                 PortName = connectedPorts[i].output.portName,
+                ConditionBoolean = (string)connectedPorts[i].output.userData,
                 TargetNodeGuid = inputNode.GUID
             });
         }
@@ -90,8 +100,6 @@ public class GraphSaveUtility
                 Position = dialogueNode.GetPosition().position
             });
         }
-
-        return true;
     }
 
     private void SaveExposedProperties(DialogueContainer dialogueContainer)
@@ -146,14 +154,13 @@ public class GraphSaveUtility
         }
 
         ClearGraph();
+        LoadExposedProperties();
         CreateNodes();
         ConnectNodes();
-        LoadExposedProperties();
     }
 
     private void LoadExposedProperties()
     {
-        _targetGraphView.ClearBlackboardAndExposedProperties();
         foreach (var exposedPropertyData in _containerCache.ExposedStringProperties)
         {
             ExposedProperty exposedProperty = new ExposedProperty(exposedPropertyData.PropertyName, exposedPropertyData.PropertyType);
@@ -221,7 +228,7 @@ public class GraphSaveUtility
             _targetGraphView.AddElement(tempNode);
 
             var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.NodeGUID).ToList();
-            nodePorts.ForEach(x => _targetGraphView.AddChoicePort(tempNode, x.PortName));
+            nodePorts.ForEach(x => _targetGraphView.AddChoicePort(tempNode, x.PortName, x.ConditionBoolean));
         }
     }
 
@@ -235,5 +242,7 @@ public class GraphSaveUtility
             Edges.Where(x => x.input.node == perNode).ToList().ForEach(edge => _targetGraphView.RemoveElement(edge));
             _targetGraphView.RemoveElement(perNode);
         }
+        
+        _targetGraphView.ClearBlackboardAndExposedProperties();
     }
 }

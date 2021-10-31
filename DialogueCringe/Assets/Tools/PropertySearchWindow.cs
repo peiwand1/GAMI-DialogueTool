@@ -1,23 +1,18 @@
 ﻿using System.Collections.Generic;
 using Tools.Runtime.Properties;
-using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PropertySearchWindow : ScriptableObject, ISearchWindowProvider
 {
     private DialogueGraphView _graphView;
-    private EditorWindow _editorWindow;
     private Texture2D _indentationIcon;
     private Blackboard _blackboard;
 
-    public void Init(EditorWindow editorWindow, DialogueGraphView graphView)
+    public void Init(DialogueGraphView graphView)
     {
-        _editorWindow = editorWindow;
         _graphView = graphView;
-        _indentationIcon = new Texture2D(1, 1);
-        _indentationIcon.SetPixel(0,0, new Color(0,0,0,0));
-        _indentationIcon.Apply();
+        _indentationIcon = _graphView._indentationIcon;
     }
     
     public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
@@ -50,19 +45,25 @@ public class PropertySearchWindow : ScriptableObject, ISearchWindowProvider
         switch (SearchTreeEntry.userData)
         {
             case "String":
-                _graphView.AddPropertyToBlackboard(new ExposedProperty("New String Property","String"));
+                AddPropertyToBlackboard("New String", "String");
                 return true;
             case "Boolean":
-                _graphView.AddPropertyToBlackboard(new ExposedProperty("New Boolean Property","Boolean"));
+                AddPropertyToBlackboard("New Boolean", "Boolean");
                 return true;
             case "Integer":
-                _graphView.AddPropertyToBlackboard(new ExposedProperty("New Integer Property","Integer"));
+                AddPropertyToBlackboard("New Integer", "Integer");
                 return true;
             case "Float":
-                _graphView.AddPropertyToBlackboard(new ExposedProperty("New Float Property","Float"));
+                AddPropertyToBlackboard("New Float", "Float");
                 return true;
             default:
                 return false;
         }
+    }
+
+    private void AddPropertyToBlackboard(string propertyName, string propertyType)
+    {
+        _graphView.AddPropertyToBlackboard(new ExposedProperty(propertyName, propertyType));
+        _graphView.RefreshDropdown(propertyType);
     }
 }

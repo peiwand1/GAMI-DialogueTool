@@ -10,18 +10,25 @@ using UnityEditor.UIElements;
 using Button = UnityEngine.UIElements.Button;
 using Label = UnityEngine.UIElements.Label;
 
+
 public class DialogueGraphView : GraphView
 {
     public readonly Vector2 defaultNodeSize = new Vector2(150, 200);
-
     public Blackboard Blackboard;
     public List<ExposedProperty> ExposedProperties = new List<ExposedProperty>();
     private NodeSearchWindow searchWindow;
     private PropertySearchWindow propertySearchWindow;
-    public EditorWindow EditorWindow;
+    public DialogueGraph EditorWindow;
+    public Texture2D _indentationIcon;
+    public string oldConditionName;
+    public string newConditionName;
 
-    public DialogueGraphView(EditorWindow editorWindow)
+    public DialogueGraphView(DialogueGraph editorWindow)
     {
+        _indentationIcon = new Texture2D(1, 1);
+        _indentationIcon.SetPixel(0,0, new Color(0,0,0,0));
+        _indentationIcon.Apply();
+        
         EditorWindow = editorWindow;
         styleSheets.Add(Resources.Load<StyleSheet>("DialogueGraph"));
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
@@ -35,26 +42,25 @@ public class DialogueGraphView : GraphView
         grid.StretchToParentSize();
 
         AddElement(GenerateEntryPointNode());
-        AddSearchWindow(editorWindow);
+        AddNodeSearchWindow(editorWindow);
     }
 
-    private void AddSearchWindow(EditorWindow editorWindow)
+    private void AddNodeSearchWindow(EditorWindow editorWindow)
     {
         searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
         searchWindow.Init(editorWindow, this);
         nodeCreationRequest = context =>
         {
-            Debug.Log(context.screenMousePosition);
             if (context.screenMousePosition.x == 0 && context.screenMousePosition.y == 0)
             {
-                context.screenMousePosition.x = 1000;
-                context.screenMousePosition.y = 450;
+                context.screenMousePosition.x = editorWindow.position.x + editorWindow.position.width/2;
+                context.screenMousePosition.y = (editorWindow.position.y + editorWindow.position.height/2) - 120;
             }
             SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
         };
     }
 
-    public void OpenSearchWindow()
+    public void OpenNodeSearchWindow()
     {
         nodeCreationRequest.Invoke(default);
     }
@@ -62,9 +68,9 @@ public class DialogueGraphView : GraphView
     public void AddPropertySearchWindow(EditorWindow editorWindow)
     {
         propertySearchWindow = ScriptableObject.CreateInstance<PropertySearchWindow>();
-        propertySearchWindow.Init(editorWindow, this);
+        propertySearchWindow.Init(this);
         Blackboard.addItemRequested = context =>
-            SearchWindow.Open(new SearchWindowContext(new Vector2(50,50)), propertySearchWindow);
+            SearchWindow.Open(new SearchWindowContext(new Vector2(editorWindow.position.x + 125,editorWindow.position.y + 60)), propertySearchWindow);
     }
 
     public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
@@ -147,7 +153,7 @@ public class DialogueGraphView : GraphView
         return dialogueNode;
     }
 
-    public void AddChoicePort(DialogueNode dialogueNode, string overriddenPortName = "")
+    public void AddChoicePort(DialogueNode dialogueNode, string overriddenPortName = "", string overrideConditionBoolean = "No condition")
     {
         var generatedPort = GeneratePort(dialogueNode, Direction.Output);
 
@@ -163,22 +169,50 @@ public class DialogueGraphView : GraphView
             name = string.Empty,
             value = choicePortName
         };
+
+        var variableDropdown = GenerateDropdown(overrideConditionBoolean);
+        
+        generatedPort.contentContainer.Add(variableDropdown);
         textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
         generatedPort.contentContainer.Add( new Label(" "));
         generatedPort.contentContainer.Add(textField);
+
         var deleteButton = new Button(() => RemovePort(dialogueNode, generatedPort))
         {
             text = "X"
         };
         generatedPort.contentContainer.Add(deleteButton);
-
+        variableDropdown.RegisterValueChangedCallback(evt => generatedPort.userData = evt.newValue);
 
         generatedPort.portName = choicePortName;
-
+        generatedPort.userData = variableDropdown.value;
         dialogueNode.outputContainer.Add(generatedPort);
         dialogueNode.RefreshExpandedState();
         dialogueNode.RefreshPorts();
 
+    }
+
+    private DropdownField GenerateDropdown(string overrideConditionBoolean)
+    {
+        var variables = ExposedProperties.Where(x => x.PropertyType == "Boolean").ToList();
+        var variableDropdown = new DropdownField();
+        variableDropdown.choices.Add("No condition");
+        variableDropdown.choices.AddRange(variables.Select(x => x.PropertyName).ToList());
+        if (variables.Select(x => x.PropertyName).Contains(overrideConditionBoolean))
+        {
+            variableDropdown.value = overrideConditionBoolean;
+        }
+        else if (overrideConditionBoolean.Equals(oldConditionName))
+        {
+            variableDropdown.value = newConditionName;
+        }
+        else
+        {
+            variableDropdown.value = "No condition";
+        }
+        variableDropdown.style.minWidth = new StyleLength(100);
+        variableDropdown.style.maxWidth = new StyleLength(100);
+        return variableDropdown;
     }
 
     private void RemovePort(DialogueNode dialogueNode, Port generatedPort)
@@ -219,7 +253,7 @@ public class DialogueGraphView : GraphView
 
         var container = new VisualElement();
         dynamic propertyValueField = new TextField();
-        var blackboardField = new BlackboardField { text = property.PropertyName, typeText = "" };
+        var blackboardField = new BlackboardField { text = property.PropertyName };
 
         switch (localPropertyType)
         {
@@ -228,25 +262,26 @@ public class DialogueGraphView : GraphView
                 {
                     localPropertyValue = "New String";
                 }
-                
+
                 blackboardField.typeText = "string";
                 propertyValueField = new TextField("Value:")
                 {
                     value = localPropertyValue
                 };
                 property.PropertyValue = localPropertyValue;
-                
+
                 ((TextField)propertyValueField).RegisterValueChangedCallback(evt =>
                 {
-                    var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+                    var changingPropertyIndex =
+                        ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
                     ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
                 });
-                
+
                 break;
             case "Boolean":
                 if (localPropertyValue == null)
                 {
-                    localPropertyValue = true;
+                    localPropertyValue = false;
                 }
 
                 blackboardField.typeText = "boolean";
@@ -255,19 +290,21 @@ public class DialogueGraphView : GraphView
                     value = localPropertyValue
                 };
                 property.PropertyValue = localPropertyValue;
-                
+
                 ((Toggle)propertyValueField).RegisterValueChangedCallback(evt =>
                 {
-                    var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+                    var changingPropertyIndex =
+                        ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
                     ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
                 });
-                
+
                 break;
             case "Integer":
                 if (localPropertyValue == null)
                 {
                     localPropertyValue = 0;
                 }
+
                 blackboardField.typeText = "integer";
                 propertyValueField = new IntegerField("Value:")
                 {
@@ -275,13 +312,14 @@ public class DialogueGraphView : GraphView
 
                 };
                 property.PropertyValue = localPropertyValue;
-                
+
                 ((IntegerField)propertyValueField).RegisterValueChangedCallback(evt =>
                 {
-                    var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+                    var changingPropertyIndex =
+                        ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
                     ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
                 });
-                
+
                 break;
 
             case "Float":
@@ -289,7 +327,7 @@ public class DialogueGraphView : GraphView
                 {
                     localPropertyValue = 0.0f;
                 }
-                
+
                 blackboardField.typeText = "float";
                 propertyValueField = new FloatField("Value:")
                 {
@@ -297,19 +335,42 @@ public class DialogueGraphView : GraphView
 
                 };
                 property.PropertyValue = localPropertyValue;
-                
+
                 ((FloatField)propertyValueField).RegisterValueChangedCallback(evt =>
-                {
+                {            
                     var changingPropertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
                     ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
                 });
-                
+
                 break;
         }
+
         container.Add(blackboardField);
         var blackboardValueRow = new BlackboardRow(blackboardField, propertyValueField);
         container.Add(blackboardValueRow);
-        
+
+        container.AddManipulator(new ContextualMenuManipulator((evt) =>
+        {
+            var propertyIndex = ExposedProperties.FindIndex(x => x.PropertyName.Equals(property.PropertyName));
+            evt.menu.AppendAction("Delete", (a) => RemovePropertyFromBlackboard(container, propertyIndex, property.PropertyType), DropdownMenuAction.AlwaysEnabled);
+        }));
         Blackboard.Add(container);
+    }
+
+    private void RemovePropertyFromBlackboard(VisualElement property, int placeInList, string propertyType)
+    {
+        Blackboard.Remove(property);
+        ExposedProperties.RemoveAt(placeInList);
+
+        RefreshDropdown(propertyType);
+    }
+
+    public void RefreshDropdown(string propertyType)
+    {
+        if (propertyType.Equals("Boolean"))
+        {
+            EditorWindow.RequestDataOperation(true);
+            EditorWindow.RequestDataOperation(false);
+        }
     }
 }

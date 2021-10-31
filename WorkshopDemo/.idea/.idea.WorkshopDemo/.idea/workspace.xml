@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f0e5d36-59da-4360-bc5f-ae7fa3ed3b07" name="Changes" comment="" />
+    <list default="true" id="8f0e5d36-59da-4360-bc5f-ae7fa3ed3b07" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../DialogueCringe/Assets/Scripts/DialogueParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DialogueCringe/Assets/Scripts/DialogueParser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueParser.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,12 +17,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Tools/Runtime/GraphSaveUtility.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/fd824cfb55004855b9e6d51b008c90e4568778/e0/1fb6e1b5/String.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/14f2cd3d890048378cafcc686bd91a1cdd600/15/7a29ba51/VisualElement.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/787760f2093d4a7bb881e33fb1e69d9076fc00/11/71b92abb/EditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NPC2_ChoiceHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/60f4a7b331a5480aaa94dbc2506830d561000/00/03365127/Toolbar.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../DialogueCringe/Assets/Scripts/DialogueParser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/33feec9ae0084068845fa08e854b12423ce00/52/d2451305/Node.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Tools/Runtime/GraphSaveUtility.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1zhwNzwFVwliWQA6WfMnG1rpfGJ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -75,6 +76,13 @@
       <workItem from="1635173716138" duration="162000" />
       <workItem from="1635173988100" duration="706000" />
       <workItem from="1635174839955" duration="5938000" />
+      <workItem from="1635265400600" duration="76000" />
+      <workItem from="1635265518700" duration="4034000" />
+      <workItem from="1635279318240" duration="3001000" />
+      <workItem from="1635350313905" duration="771000" />
+      <workItem from="1635364608684" duration="3942000" />
+      <workItem from="1635442631015" duration="795000" />
+      <workItem from="1635618153473" duration="1630000" />
     </task>
     <servers />
   </component>
