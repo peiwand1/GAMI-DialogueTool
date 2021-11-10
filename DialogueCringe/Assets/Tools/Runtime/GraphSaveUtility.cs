@@ -24,7 +24,7 @@ public class GraphSaveUtility
 
     public void SaveGraph(string fileName)
     {
-        if (Edges.Count.Equals(0) || Edges.Find(x => x.output.node.title == "START").Equals(null) || Edges.Equals(null))
+        if (Edges.Count.Equals(0) || Edges.Find(x => x.output.node.title == "START") == null || Edges == null)
         {
             EditorUtility.DisplayDialog("Error", "Start Node must be connected to another node before saving!", "OK");
             return;
