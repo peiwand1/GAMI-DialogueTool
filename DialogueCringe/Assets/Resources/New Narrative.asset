@@ -23,10 +23,6 @@ MonoBehaviour:
     DialogueText: Dialogue Node
     Position: {x: 330, y: 286}
   NodeLinks:
-  - BaseNodeGuid: 64deaab0-4703-44a7-9cf1-2c76cc585177
-    PortName: Next
-    ConditionBoolean: 
-    TargetNodeGuid: 54d74565-4685-4741-ab97-2f77184baef9
   - BaseNodeGuid: 54d74565-4685-4741-ab97-2f77184baef9
     PortName: Choice 1
     ConditionBoolean: New Boolean(1)
@@ -35,6 +31,10 @@ MonoBehaviour:
     PortName: Choice 2
     ConditionBoolean: Kaas
     TargetNodeGuid: 13e47fff-3273-4310-8083-5b2dac245c9c
+  - BaseNodeGuid: 64deaab0-4703-44a7-9cf1-2c76cc585177
+    PortName: Next
+    ConditionBoolean: 
+    TargetNodeGuid: 54d74565-4685-4741-ab97-2f77184baef9
   ExposedStringProperties:
   - PropertyName: fgdfgd
     PropertyValue: 
